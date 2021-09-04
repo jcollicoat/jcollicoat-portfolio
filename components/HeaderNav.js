@@ -42,10 +42,7 @@ const Item = styled.a`
 
   @media (min-width: 800px) {
     margin: 0 0 0 ${(props) => props.theme.padding.lg};
-    opacity: 0.5;
-    transition: opacity 0.25s ease-out;
 
-    /* Underline
     ::after {
       background-color: #ffffff;
       content: "";
@@ -54,16 +51,11 @@ const Item = styled.a`
       transition: width 0.25s ease-out;
       width: 0;
     }
-    */
 
     &:hover {
-      opacity: 1;
-
-      /* Underline
       ::after {
         width: 100%;
       }
-      */
     }
   }
 `;

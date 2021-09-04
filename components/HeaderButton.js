@@ -3,8 +3,10 @@ import styled from "styled-components";
 const Button = styled.svg`
   align-self: center;
   color: #ffffff;
+  cursor: pointer;
   grid-column: -1 / -1;
   height: 2rem;
+  pointer-events: auto;
   width: 2rem;
   z-index: 101;
 

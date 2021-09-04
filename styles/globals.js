@@ -44,7 +44,6 @@ const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-    background-color: #000000;
     color: #ffffff;
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -52,22 +51,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    animation: gradient 20s ease infinite;
+    animation: gradient 20s ease infinite alternate;
+    background-color: #000000;
     background-image: linear-gradient(
       60deg,
-      rgba(254, 0, 114, 0.05),
-      rgba(187, 11, 222, 0.05),
-      rgba(90, 0, 245, 0.05),
-      rgba(11, 31, 222, 0.05),
-      rgba(0, 139, 255, 0.05)
-    ),
-    linear-gradient(
-      -60deg,
-      rgba(0, 139, 255, 0.05),
-      rgba(11, 31, 222, 0.05),
-      rgba(90, 0, 245, 0.05),
-      rgba(187, 11, 222, 0.05),
-      rgba(254, 0, 114, 0.05)
+      rgba(254, 0, 114, 0.1),
+      rgba(187, 11, 222, 0.1),
+      rgba(90, 0, 245, 0.1),
+      rgba(11, 31, 222, 0.1),
+      rgba(0, 139, 255, 0.1)
     );
     background-size: 300% 300%;
     min-height: 100vh;
@@ -79,15 +71,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, h2, h3, h4, h5, h6, p {
+    line-height: 1;
     margin: 0;
-  }
-
-  ::selection {
-    background: rgb(0, 139, 255);
-  }
-
-  ::-moz-selection {
-    background: rgb(0, 139, 255);
   }
 `;
 

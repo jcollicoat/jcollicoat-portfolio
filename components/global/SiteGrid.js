@@ -8,6 +8,7 @@ const Grid = styled.div`
   margin: 0 auto;
   max-width: 1600px;
   padding: 0 ${(props) => props.theme.padding.md};
+  position: ${(props) => props.relative && `relative`};
   width: 100%;
 
   @media (min-width: 800px) {
@@ -25,6 +26,6 @@ const Grid = styled.div`
   }
 `;
 
-export default function SiteGrid({ children }) {
-  return <Grid>{children}</Grid>;
+export default function SiteGrid({ children, relative }) {
+  return <Grid relative={relative}>{children}</Grid>;
 }

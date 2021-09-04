@@ -11,6 +11,7 @@ import HeaderNav from "./HeaderNav";
 const Wrapper = styled.header`
   mix-blend-mode: ${(props) => (props.navOpen ? `normal` : `difference`)};
   padding: ${(props) => props.theme.padding.md} 0;
+  pointer-events: none;
   position: fixed;
   top: 0;
   width: 100%;

@@ -5,6 +5,7 @@ const Logo = styled.svg`
   cursor: pointer;
   grid-column: 1 / 1;
   height: 3rem;
+  pointer-events: auto;
   width: 3rem;
   z-index: 101;
 
