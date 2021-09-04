@@ -4,8 +4,8 @@ import useMousePosition from "../../hooks/useMousePosition";
 
 const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
   style: {
-    left: `calc(${mouseX}px - 18px)`,
-    top: `calc(${mouseY}px - 18px)`,
+    left: `calc(${mouseX}px - 1rem)`,
+    top: `calc(${mouseY}px - 1rem)`,
   },
 }))`
   display: none;
@@ -15,11 +15,11 @@ const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
     background-color: #ffffff;
     border-radius: 50%;
     display: block;
-    height: 36px;
+    height: 2rem;
     mix-blend-mode: difference;
     pointer-events: none;
     position: absolute;
-    width: 36px;
+    width: 2rem;
     z-index: 200;
   }
 `;

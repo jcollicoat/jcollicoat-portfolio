@@ -9,22 +9,10 @@ import HeaderButton from "./HeaderButton";
 
 const Wrapper = styled.header`
   mix-blend-mode: difference;
-  padding: 1rem 0;
+  padding: ${(props) => props.theme.padding.md} 0;
   position: fixed;
   width: 100%;
   z-index: 100;
-
-  @media (min-width: 800px) {
-    padding: 1.5rem 0;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 2rem 0;
-  }
-
-  @media (min-width: 1600px) {
-    padding: 3rem 0;
-  }
 `;
 
 const Nav = styled.nav`
@@ -62,18 +50,18 @@ const Nav = styled.nav`
 `;
 
 const Item = styled.a`
-  margin: 2rem 0;
+  margin: ${(props) => props.theme.padding.lg} 0;
 
   @media (min-width: 800px) {
-    margin: 0 0 0 3rem;
+    margin: 0 0 0 ${(props) => props.theme.padding.lg};
   }
 
   @media (min-width: 1200px) {
-    margin: 0 0 0 5rem;
+    margin: 0 0 0 ${(props) => props.theme.padding.lg};
   }
 
   @media (min-width: 1600px) {
-    margin: 0 0 0 7rem;
+    margin: 0 0 0 ${(props) => props.theme.padding.lg};
   }
 `;
 

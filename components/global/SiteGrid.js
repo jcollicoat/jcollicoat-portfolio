@@ -7,24 +7,21 @@ const Grid = styled.div`
   height: 100%;
   margin: 0 auto;
   max-width: 1600px;
-  padding: 0 1rem;
+  padding: 0 ${(props) => props.theme.padding.md};
   width: 100%;
 
   @media (min-width: 800px) {
     grid-gap: 0.75rem;
     grid-template-columns: repeat(16, 1fr);
-    padding: 0 1.5rem;
   }
 
   @media (min-width: 1200px) {
     grid-gap: 1rem;
     grid-template-columns: repeat(20, 1fr);
-    padding: 0 2rem;
   }
 
   @media (min-width: 1600px) {
     grid-template-columns: repeat(24, 1fr);
-    padding: 0 3rem;
   }
 `;
 

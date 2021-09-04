@@ -1,6 +1,18 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    --padding-sm: 1rem;
+    --padding-md: 2rem;
+    --padding-lg: 3rem;
+
+    @media (min-width: 1200px) {
+      --padding-sm: 2rem;
+      --padding-md: 3rem;
+      --padding-lg: 4rem;
+    }
+  }
+
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
