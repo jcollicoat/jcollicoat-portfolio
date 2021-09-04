@@ -14,10 +14,6 @@ const Section = styled.section`
 const Joseph = styled.div`
   grid-column: 1 / -1;
 
-  @media (min-width: 400px) {
-    grid-column: 2 / -2;
-  }
-
   @media (min-width: 800px) {
     grid-column: 1 / 9;
     grid-row: 1 / 3;
@@ -34,10 +30,6 @@ const Joseph = styled.div`
 
 const Collicoat = styled.div`
   grid-column: 1 / -1;
-
-  @media (min-width: 400px) {
-    grid-column: 2 / -2;
-  }
 
   @media (min-width: 800px) {
     grid-column: 9 / -1;
@@ -104,6 +96,7 @@ export default function HomeHero() {
       <SiteGrid>
         <Joseph>
           <Lottie
+            isClickToPauseDisabled={true}
             options={{
               animationData: josephData,
               autoplay: true,
@@ -113,6 +106,7 @@ export default function HomeHero() {
         </Joseph>
         <Collicoat>
           <Lottie
+            isClickToPauseDisabled={true}
             options={{
               animationData: collicoatData,
               autoplay: true,

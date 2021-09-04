@@ -8,7 +8,7 @@ import HeaderLogo from "./HeaderLogo";
 import HeaderButton from "./HeaderButton";
 
 const Wrapper = styled.header`
-  mix-blend-mode: difference;
+  mix-blend-mode: ${(props) => (props.navOpen ? `normal` : `difference`)};
   padding: ${(props) => props.theme.padding.md} 0;
   position: fixed;
   top: 0;
@@ -23,10 +23,10 @@ const Nav = styled.nav`
   font-size: 2rem;
   font-weight: 500;
   height: 100vh;
-  justify-content: center;
   left: 0;
   line-height: 1;
   opacity: ${(props) => (props.navOpen ? `1` : `0`)};
+  padding-top: 8rem;
   position: absolute;
   pointer-events: ${(props) => (props.navOpen ? `auto` : `none`)};
   text-align: center;
@@ -44,6 +44,7 @@ const Nav = styled.nav`
     height: auto;
     justify-content: flex-end;
     opacity: 1;
+    padding-top: 0;
     pointer-events: auto;
     position: static;
     text-align: right;
@@ -75,7 +76,7 @@ export default function Header() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper navOpen={navOpen}>
       <SiteGrid>
         <HeaderLogo />
         <HeaderButton handleClick={handleClick} navOpen={navOpen} />
