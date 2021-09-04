@@ -54,7 +54,9 @@ const Content = styled.div`
 `;
 
 const Title = styled.h2`
-  font-family: "Ultrasolar Trial";
+  font-family: "Ultrasolar Web", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
   font-size: 3rem;
   font-weight: 400;
   line-height: 0.9;
@@ -80,10 +82,14 @@ const Description = styled.div`
 const Tags = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   position: absolute;
   right: ${(props) => props.theme.padding.md};
   top: 0;
+
+  @media (min-width: 800px) {
+    font-size: 0.75rem;
+  }
 `;
 
 const Tag = styled.div`
