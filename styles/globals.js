@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Disable cursor on mouse-controlled devices
     @media (hover: hover) and (pointer: fine) {
-      cursor: none;
+      //cursor: none;
     }
   }
 
@@ -46,7 +46,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: #000000;
     color: #ffffff;
-    cursor: none;
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding: 0;
@@ -81,6 +80,14 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
+  }
+
+  ::selection {
+    background: rgb(0, 139, 255);
+  }
+
+  ::-moz-selection {
+    background: rgb(0, 139, 255);
   }
 `;
 

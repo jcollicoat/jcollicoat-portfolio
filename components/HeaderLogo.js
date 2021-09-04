@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const Logo = styled.svg`
+  cursor: pointer;
   grid-column: 1 / 1;
   height: 3rem;
   width: 3rem;

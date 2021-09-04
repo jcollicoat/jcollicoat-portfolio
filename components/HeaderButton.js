@@ -15,7 +15,7 @@ const Button = styled.svg`
 
 const Line = styled.line`
   opacity: ${(props) => props.opacity};
-  transition: opacity 0.5s ease;
+  transition: opacity 0.25s ease-out;
 `;
 
 export default function HeaderButton({ handleClick, navOpen }) {

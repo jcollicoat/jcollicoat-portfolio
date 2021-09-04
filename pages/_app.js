@@ -18,7 +18,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <MouseCursor />
       <ThemeProvider theme={theme}>
         <Header />
         <Component {...pageProps} />

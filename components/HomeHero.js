@@ -7,8 +7,9 @@ import * as josephData from "../lotties/joseph.json";
 import * as collicoatData from "../lotties/collicoat.json";
 
 const Section = styled.section`
-  margin: 10rem 0;
+  margin-bottom: 10rem;
   mix-blend-mode: difference;
+  padding-top: 10rem;
 `;
 
 const Joseph = styled.div`
@@ -77,7 +78,7 @@ const CTA = styled.a`
   display: flex;
   margin-top: ${(props) => props.theme.padding.sm};
   opacity: 0.5;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.25s ease-out;
 
   :hover {
     opacity: 1;
