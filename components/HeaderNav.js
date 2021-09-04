@@ -25,7 +25,7 @@ const Nav = styled.nav`
     background: none;
     flex-direction: row;
     font-size: 1rem;
-    grid-column: 3 / -1;
+    grid-column: 3 / -2;
     height: auto;
     justify-content: flex-end;
     opacity: 1;

@@ -1,10 +1,13 @@
 import Lottie from "react-lottie";
 import styled from "styled-components";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import SiteGrid from "./global/SiteGrid";
 
 import * as josephData from "../lotties/joseph.json";
 import * as collicoatData from "../lotties/collicoat.json";
+import { useEffect } from "react/cjs/react.development";
 
 const Section = styled.section`
   margin: 10rem 0;
@@ -92,6 +95,34 @@ const CTAIcon = styled.svg`
 `;
 
 export default function HomeHero() {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.75,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+    if (!inView) {
+      controls.start("hidden");
+    }
+  }, [controls, inView]);
+
+  const variants = {
+    hidden: { opacity: 0, y: `2rem` },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.25,
+        duration: 1,
+        ease: `easeOut`,
+      },
+    },
+  };
+
   return (
     <Section>
       <SiteGrid>
@@ -115,7 +146,13 @@ export default function HomeHero() {
             }}
           />
         </Collicoat>
-        <Intro>
+        <Intro
+          ref={ref}
+          as={motion.div}
+          initial="hidden"
+          animate={controls}
+          variants={variants}
+        >
           <Name>{`I'm Joseph,`}</Name>
           <p>
             a web developer and graphic designer with a passion for everything
