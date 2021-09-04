@@ -11,6 +11,7 @@ const Wrapper = styled.header`
   mix-blend-mode: difference;
   padding: ${(props) => props.theme.padding.md} 0;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 100;
 `;
@@ -36,9 +37,10 @@ const Nav = styled.nav`
 
   @media (min-width: 800px) {
     align-self: center;
+    background: none;
     flex-direction: row;
     font-size: 1rem;
-    grid-column: 2 / -1;
+    grid-column: 3 / -1;
     height: auto;
     justify-content: flex-end;
     opacity: 1;

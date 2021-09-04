@@ -1,5 +1,7 @@
 import Head from "next/head";
 
+import HomeHero from "../components/HomeHero";
+
 export default function Home() {
   return (
     <>
@@ -8,6 +10,7 @@ export default function Home() {
         <meta name="description" content="Personal Portfolio 2021" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <HomeHero />
     </>
   );
 }

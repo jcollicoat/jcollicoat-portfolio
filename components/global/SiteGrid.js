@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Grid = styled.div`
   display: grid;
-  grid-gap: 0.5rem;
+  grid-column-gap: 0.5rem;
   grid-template-columns: repeat(12, 1fr);
   height: 100%;
   margin: 0 auto;
@@ -11,12 +11,12 @@ const Grid = styled.div`
   width: 100%;
 
   @media (min-width: 800px) {
-    grid-gap: 0.75rem;
+    grid-column-gap: 0.75rem;
     grid-template-columns: repeat(16, 1fr);
   }
 
   @media (min-width: 1200px) {
-    grid-gap: 1rem;
+    grid-column-gap: 1rem;
     grid-template-columns: repeat(20, 1fr);
   }
 

@@ -6,6 +6,10 @@ const Logo = styled.svg`
   height: 3rem;
   width: 3rem;
   z-index: 101;
+
+  @media (min-width: 1200px) {
+    grid-column: 2 / 2;
+  }
 `;
 
 export default function HeaderLogo() {

@@ -2,9 +2,15 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   :root {
-    --padding-sm: 1rem;
-    --padding-md: 2rem;
-    --padding-lg: 3rem;
+    --padding-sm: 0.5rem;
+    --padding-md: 1rem;
+    --padding-lg: 1.5rem;
+
+    @media (min-width: 400px) {
+      --padding-sm: 1rem;
+      --padding-md: 2rem;
+      --padding-lg: 3rem;
+    }
 
     @media (min-width: 1200px) {
       --padding-sm: 2rem;
@@ -60,7 +66,6 @@ const GlobalStyle = createGlobalStyle`
     color: #ffffff;
     cursor: none;
     margin: 0;
-    min-height: 100vh;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     padding: 0;
   }
@@ -68,6 +73,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
   }
 `;
 
