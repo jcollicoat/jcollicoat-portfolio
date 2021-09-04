@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Lottie from "react-lottie";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
@@ -7,7 +8,6 @@ import SiteGrid from "./global/SiteGrid";
 
 import * as josephData from "../lotties/joseph.json";
 import * as collicoatData from "../lotties/collicoat.json";
-import { useEffect } from "react/cjs/react.development";
 
 const Section = styled.section`
   margin: 10rem 0;
