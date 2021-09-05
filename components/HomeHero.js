@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import Lottie from "react-lottie";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+
+import useAnimateIn from "../hooks/useAnimateIn";
 
 import SiteGrid from "./global/SiteGrid";
 
@@ -48,7 +48,7 @@ const Collicoat = styled.div`
   }
 `;
 
-const Intro = styled.div`
+const Intro = styled(motion.div)`
   grid-column: 1 / -1;
   margin-top: ${(props) => props.theme.padding.lg};
 
@@ -95,33 +95,11 @@ const CTAIcon = styled.svg`
 `;
 
 export default function HomeHero() {
-  const controls = useAnimation();
-  const { ref, inView } = useInView({
-    threshold: 0.75,
-    triggerOnce: true,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-    if (!inView) {
-      controls.start("hidden");
-    }
-  }, [controls, inView]);
-
-  const variants = {
-    hidden: { opacity: 0, y: `2rem` },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.25,
-        duration: 1,
-        ease: `easeOut`,
-      },
-    },
-  };
+  const {
+    ref: introRef,
+    ctrls: introCtrls,
+    vars: introVars,
+  } = useAnimateIn({ delay: 0.5 });
 
   return (
     <Section>
@@ -147,11 +125,10 @@ export default function HomeHero() {
           />
         </Collicoat>
         <Intro
-          ref={ref}
-          as={motion.div}
+          ref={introRef}
           initial="hidden"
-          animate={controls}
-          variants={variants}
+          animate={introCtrls}
+          variants={introVars}
         >
           <Name>{`I'm Joseph,`}</Name>
           <p>

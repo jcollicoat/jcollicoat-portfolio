@@ -1,5 +1,8 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
+import useAnimateIn from "../hooks/useAnimateIn";
 
 const Nav = styled.nav`
   background-color: #000000;
@@ -37,7 +40,7 @@ const Nav = styled.nav`
   }
 `;
 
-const Item = styled.a`
+const Item = styled(motion.a)`
   margin: ${(props) => props.theme.padding.lg} 0;
 
   @media (min-width: 800px) {
@@ -61,16 +64,67 @@ const Item = styled.a`
 `;
 
 export default function HeaderNav({ navOpen }) {
+  const {
+    ref: workRef,
+    ctrls: workCtrls,
+    vars: workVars,
+  } = useAnimateIn({
+    delay: 0.1,
+    distance: `1rem`,
+    duration: 0.5,
+  });
+
+  const {
+    ref: blogRef,
+    ctrls: blogCtrls,
+    vars: blogVars,
+  } = useAnimateIn({
+    delay: 0.2,
+    distance: `1rem`,
+    duration: 0.5,
+  });
+
+  const {
+    ref: contactRef,
+    ctrls: contactCtrls,
+    vars: contactVars,
+  } = useAnimateIn({
+    delay: 0.2,
+    distance: `1rem`,
+    duration: 0.5,
+  });
+
   return (
     <Nav navOpen={navOpen}>
       <Link href="/" passHref>
-        <Item>Work</Item>
+        <Item
+          ref={workRef}
+          initial="hidden"
+          animate={workCtrls}
+          variants={workVars}
+        >
+          Work
+        </Item>
       </Link>
       <Link href="/blog" passHref>
-        <Item>Blog</Item>
+        <Item
+          ref={blogRef}
+          initial="hidden"
+          animate={blogCtrls}
+          variants={blogVars}
+        >
+          Blog
+        </Item>
       </Link>
       <Link href="/contact" passHref>
-        <Item>Contact</Item>
+        <Item
+          ref={contactRef}
+          initial="hidden"
+          animate={contactCtrls}
+          variants={contactVars}
+        >
+          Contact
+        </Item>
       </Link>
     </Nav>
   );

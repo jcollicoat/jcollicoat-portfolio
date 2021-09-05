@@ -86,9 +86,11 @@ const Tags = styled.div`
   position: absolute;
   right: ${(props) => props.theme.padding.md};
   top: 0;
+  width: 1rem;
 
   @media (min-width: 800px) {
     font-size: 0.75rem;
+    width: 1.25rem;
   }
 `;
 
