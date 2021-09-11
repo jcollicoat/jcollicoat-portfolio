@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import { useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-export default function useAnimateIn({ delay, distance, duration, threshold }) {
+export default function useAnimateIn({
+  customVars,
+  delay,
+  distance,
+  duration,
+  threshold,
+}) {
   const ctrls = useAnimation();
   const { ref, inView } = useInView({
     threshold: threshold || 0.75,
@@ -18,7 +24,7 @@ export default function useAnimateIn({ delay, distance, duration, threshold }) {
     }
   }, [ctrls, inView]);
 
-  const vars = {
+  const vars = customVars || {
     hidden: { opacity: 0, y: distance || `2rem` },
     visible: {
       opacity: 1,

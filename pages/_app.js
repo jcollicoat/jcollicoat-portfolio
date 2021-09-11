@@ -1,4 +1,5 @@
 import { ThemeProvider } from "styled-components";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 import MouseCursor from "../components/global/MouseCursor";
 import Header from "../components/Header";
@@ -17,11 +18,13 @@ const theme = {
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ParallaxProvider>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Header />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ParallaxProvider>
     </>
   );
 }

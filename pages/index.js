@@ -14,6 +14,8 @@ export default function Home() {
       <main>
         <HomeHero />
         <HomeProject />
+        <HomeProject />
+        <HomeProject />
       </main>
     </>
   );

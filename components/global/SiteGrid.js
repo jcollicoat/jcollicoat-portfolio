@@ -4,7 +4,6 @@ const Grid = styled.div`
   display: grid;
   grid-column-gap: 0.5rem;
   grid-template-columns: repeat(12, 1fr);
-  height: 100%;
   margin: 0 auto;
   max-width: 1600px;
   padding: 0 ${(props) => props.theme.padding.md};

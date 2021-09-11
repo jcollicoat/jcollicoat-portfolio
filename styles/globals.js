@@ -51,6 +51,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    /* Disable background animation
     animation: gradient 20s ease infinite alternate;
     background-color: #000000;
     background-image: linear-gradient(
@@ -62,6 +63,8 @@ const GlobalStyle = createGlobalStyle`
       rgba(0, 139, 255, 0.1)
     );
     background-size: 300% 300%;
+    */
+    background-color: #111111;
     min-height: 100vh;
   }
 
