@@ -4,7 +4,6 @@ import { Parallax } from "react-scroll-parallax";
 import Image from "next/image";
 import Link from "next/link";
 
-import useAnimateIn from "../hooks/useAnimateIn";
 import useFadeIn from "../hooks/useFadeIn";
 import useMediaQuery from "../hooks/useMediaQuery";
 
@@ -57,7 +56,7 @@ const ImageOverlay = styled.div`
   transition: opacity 0.25s ease-out;
 
   ${Section}:hover & {
-    opacity: 0.75;
+    opacity: 0.5;
   }
 `;
 
@@ -119,7 +118,7 @@ const Description = styled(motion.div)`
   max-width: 30rem;
 `;
 
-const Tags = styled.div`
+const Tags = styled(motion.div)`
   display: flex;
   flex-direction: column;
   font-size: 0.5rem;
@@ -150,9 +149,15 @@ export default function Project({ project, reversed }) {
   const isSmall = useMediaQuery("(max-width: 1200px)");
 
   // Image animation
-  const { ref: imageRef, ctrls: imageCtrls, vars: imageVars } = useFadeIn({});
+  const {
+    ref: imageRef,
+    ctrls: imageCtrls,
+    vars: imageVars,
+  } = useFadeIn({
+    threshold: 0.25,
+  });
 
-  const imageYOffset = isSmall ? [`0px`, `-40px`] : [`80px`, `-80px`];
+  const imageYOffset = isSmall ? [`0px`, `-40px`] : [`0px`, `-80px`];
 
   // Content animation
   const {
@@ -161,9 +166,20 @@ export default function Project({ project, reversed }) {
     vars: contentVars,
   } = useFadeIn({
     delay: 0.1,
+    threshold: 0.5,
   });
 
-  const yOffset = isSmall ? [`0px`, `-120px`] : [`120px`, `-120px`];
+  const contentYOffset = isSmall ? [`0px`, `-120px`] : [`80px`, `-160px`];
+
+  // Tags animation
+  const {
+    ref: tagsRef,
+    ctrls: tagsCtrls,
+    vars: tagsVars,
+  } = useFadeIn({
+    delay: 0.2,
+    threshold: 0.5,
+  });
 
   return (
     <Section>
@@ -199,12 +215,18 @@ export default function Project({ project, reversed }) {
               variants={contentVars}
               reversed={reversed}
             >
-              <Parallax y={yOffset}>
+              <Parallax y={contentYOffset}>
                 <Title>{project.name}</Title>
                 <Description>{project.description}</Description>
               </Parallax>
             </Content>
-            <Tags reversed={reversed}>
+            <Tags
+              ref={tagsRef}
+              initial="hidden"
+              animate={tagsCtrls}
+              variants={tagsVars}
+              reversed={reversed}
+            >
               {project.tags.map((tag, index) => {
                 return <Tag key={index}>{tag.name}</Tag>;
               })}

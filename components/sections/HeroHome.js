@@ -1,8 +1,10 @@
 import Lottie from "react-lottie";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Parallax } from "react-scroll-parallax";
 
 import useAnimateIn from "../../hooks/useAnimateIn";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 import SiteGrid from "../global/SiteGrid";
 
@@ -14,7 +16,7 @@ const Section = styled.section`
   mix-blend-mode: difference;
 `;
 
-const Joseph = styled.div`
+const Joseph = styled(Parallax)`
   grid-column: 1 / -1;
 
   @media (min-width: 800px) {
@@ -31,7 +33,7 @@ const Joseph = styled.div`
   }
 `;
 
-const Collicoat = styled.div`
+const Collicoat = styled(Parallax)`
   grid-column: 1 / -1;
 
   @media (min-width: 800px) {
@@ -95,16 +97,24 @@ const CTAIcon = styled.svg`
 `;
 
 export default function HeroHome({ data }) {
+  // Media query for parallax
+  const isSmall = useMediaQuery("(max-width: 800px)");
+
+  // Intro animation
   const {
     ref: introRef,
     ctrls: introCtrls,
     vars: introVars,
   } = useAnimateIn({ delay: 0.5 });
 
+  // Name animation
+  const josephYOffset = isSmall ? [`0px`, `0px`] : [`-40px`, `40px`];
+  const collicoatYOffset = isSmall ? [`0px`, `0px`] : [`80px`, `0px`];
+
   return (
     <Section>
       <SiteGrid>
-        <Joseph>
+        <Joseph y={josephYOffset}>
           <Lottie
             isClickToPauseDisabled={true}
             options={{
@@ -114,7 +124,7 @@ export default function HeroHome({ data }) {
             }}
           />
         </Joseph>
-        <Collicoat>
+        <Collicoat y={collicoatYOffset}>
           <Lottie
             isClickToPauseDisabled={true}
             options={{
