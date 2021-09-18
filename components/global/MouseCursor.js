@@ -18,7 +18,7 @@ const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
     height: 2rem;
     mix-blend-mode: difference;
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     width: 2rem;
     z-index: 200;
   }
