@@ -65,9 +65,9 @@ const Item = styled(motion.a)`
 
 export default function HeaderNav({ navOpen }) {
   const {
-    ref: workRef,
-    ctrls: workCtrls,
-    vars: workVars,
+    ref: projectsRef,
+    ctrls: projectsCtrls,
+    vars: projectsVars,
   } = useAnimateIn({
     delay: 0.1,
     distance: `1rem`,
@@ -75,9 +75,9 @@ export default function HeaderNav({ navOpen }) {
   });
 
   const {
-    ref: blogRef,
-    ctrls: blogCtrls,
-    vars: blogVars,
+    ref: articlesRef,
+    ctrls: articlesCtrls,
+    vars: articlesVars,
   } = useAnimateIn({
     delay: 0.2,
     distance: `1rem`,
@@ -98,22 +98,22 @@ export default function HeaderNav({ navOpen }) {
     <Nav navOpen={navOpen}>
       <Link href="/" passHref>
         <Item
-          ref={workRef}
+          ref={projectsRef}
           initial="hidden"
-          animate={workCtrls}
-          variants={workVars}
+          animate={projectsCtrls}
+          variants={projectsVars}
         >
-          Work
+          Projects
         </Item>
       </Link>
       <Link href="/blog" passHref>
         <Item
-          ref={blogRef}
+          ref={articlesRef}
           initial="hidden"
-          animate={blogCtrls}
-          variants={blogVars}
+          animate={articlesCtrls}
+          variants={articlesVars}
         >
-          Blog
+          Articles
         </Item>
       </Link>
       <Link href="/contact" passHref>

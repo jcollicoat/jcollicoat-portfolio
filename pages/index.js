@@ -44,9 +44,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ pageData, pageContent }) {
-  console.log(pageContent);
-
+export default function HomePage({ pageData, pageContent }) {
   return (
     <>
       <Head>

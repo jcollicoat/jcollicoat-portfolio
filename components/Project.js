@@ -118,14 +118,17 @@ const Description = styled(motion.div)`
   max-width: 30rem;
 `;
 
-const Tags = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  font-size: 0.5rem;
+const TagsParallax = styled(Parallax)`
   left: ${(props) => (props.reversed ? props.theme.padding.md : `auto`)};
   position: absolute;
   right: ${(props) => (props.reversed ? `auto` : props.theme.padding.md)};
   top: 0;
+`;
+
+const Tags = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  font-size: 0.5rem;
   width: 1rem;
 
   @media (min-width: 800px) {
@@ -169,7 +172,7 @@ export default function Project({ project, reversed }) {
     threshold: 0.5,
   });
 
-  const contentYOffset = isSmall ? [`0px`, `-120px`] : [`80px`, `-160px`];
+  const contentYOffset = isSmall ? [`0px`, `-120px`] : [`120px`, `-120px`];
 
   // Tags animation
   const {
@@ -180,6 +183,8 @@ export default function Project({ project, reversed }) {
     delay: 0.2,
     threshold: 0.5,
   });
+
+  const tagsYOffset = isSmall ? [`-40px`, `0px`] : [`-60px`, `60px`];
 
   return (
     <Section>
@@ -220,17 +225,19 @@ export default function Project({ project, reversed }) {
                 <Description>{project.description}</Description>
               </Parallax>
             </Content>
-            <Tags
-              ref={tagsRef}
-              initial="hidden"
-              animate={tagsCtrls}
-              variants={tagsVars}
-              reversed={reversed}
-            >
-              {project.tags.map((tag, index) => {
-                return <Tag key={index}>{tag.name}</Tag>;
-              })}
-            </Tags>
+            <TagsParallax y={tagsYOffset} reversed={reversed}>
+              <Tags
+                ref={tagsRef}
+                initial="hidden"
+                animate={tagsCtrls}
+                variants={tagsVars}
+                reversed={reversed}
+              >
+                {project.tags.map((tag, index) => {
+                  return <Tag key={index}>{tag.name}</Tag>;
+                })}
+              </Tags>
+            </TagsParallax>
           </SiteGrid>
         </a>
       </Link>

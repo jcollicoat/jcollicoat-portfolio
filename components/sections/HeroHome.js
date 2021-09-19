@@ -53,13 +53,14 @@ const Collicoat = styled(Parallax)`
 const Intro = styled(motion.div)`
   grid-column: 1 / -1;
   margin-top: ${(props) => props.theme.padding.lg};
+  max-width: 30rem;
 
   @media (min-width: 400px) {
     grid-column: 2 / -2;
   }
 
   @media (min-width: 800px) {
-    grid-column: 1 / 7;
+    grid-column: 1 / 8;
     grid-row: 3 / 3;
   }
 
