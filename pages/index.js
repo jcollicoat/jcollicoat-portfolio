@@ -50,7 +50,30 @@ export default function HomePage({ pageData, pageContent }) {
       <Head>
         <title>{pageData.meta_title}</title>
         <meta name="description" content={pageData.meta_description} />
-        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content={pageData.meta_title} key="ogtitle" />
+        <meta
+          property="og:description"
+          content={pageData.meta_description}
+          key="ogdesc"
+        />
+        <meta
+          property="og:site_name"
+          content="Joseph Collicoat"
+          key="ogsitename"
+        />
+        <meta
+          property="og:image"
+          content="https://dev.josephcollicoat.com/meta_image.png"
+          key="ogimage"
+        />
+        <meta
+          property="og:url"
+          content="https://dev.josephcollicoat.com"
+          key="ogtitle"
+        />
+        <meta name="twitter:card" content="summary_large_image" key="twcard" />
+        <meta name="twitter:creator" content="@jcollicoat" key="twhandle" />
+        <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <main>
         <PageContent sections={pageContent} />

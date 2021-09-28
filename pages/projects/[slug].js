@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import client from "../../lib/sanity";
 
@@ -16,13 +15,14 @@ const projectQuery = `{
     is_interactive
   }
 }`;
+// Issue is with $slug generating undefined pages
 
 export async function getStaticPaths() {
-  const paths = await client.fetch(slugsQuery);
+  const slugs = await client.fetch(slugsQuery);
 
   return {
-    paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    paths: slugs.map((slug) => ({ params: { slug: slug } })),
+    fallback: false,
   };
 }
 
