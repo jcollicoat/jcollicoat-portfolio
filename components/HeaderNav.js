@@ -1,8 +1,5 @@
 import Link from "next/link";
 import styled from "styled-components";
-import { motion } from "framer-motion";
-
-import useAnimateIn from "../hooks/useAnimateIn";
 
 const Nav = styled.nav`
   background-color: #000000;
@@ -20,7 +17,7 @@ const Nav = styled.nav`
   text-align: center;
   text-transform: uppercase;
   top: 0;
-  transition: opacity 0.25s ease-out;
+  transition: opacity 0.5s ${(props) => props.theme.easeout};
   width: 100%;
 
   @media (min-width: 800px) {
@@ -40,8 +37,22 @@ const Nav = styled.nav`
   }
 `;
 
-const Item = styled(motion.a)`
+const Item = styled.a`
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  animation: appear 0.25s ${(props) => props.theme.easeout} both;
+  animation-delay: ${(props) => props.delay};
   margin: ${(props) => props.theme.padding.lg} 0;
+  position: relative;
 
   @media (min-width: 800px) {
     margin: 0 0 0 ${(props) => props.theme.padding.lg};
@@ -51,80 +62,34 @@ const Item = styled(motion.a)`
       content: "";
       display: block;
       height: 2px;
-      transition: width 0.25s ease-out;
-      width: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      transform: scaleX(0);
+      transform-origin: top right;
+      transition: transform 0.25s ease-out;
     }
 
     &:hover {
       ::after {
-        width: 100%;
+        transform: scaleX(1);
+        transform-origin: top left;
       }
     }
   }
 `;
 
 export default function HeaderNav({ navOpen }) {
-  const {
-    ref: projectsRef,
-    ctrls: projectsCtrls,
-    vars: projectsVars,
-  } = useAnimateIn({
-    delay: 0.1,
-    distance: `1rem`,
-    duration: 0.5,
-  });
-
-  const {
-    ref: articlesRef,
-    ctrls: articlesCtrls,
-    vars: articlesVars,
-  } = useAnimateIn({
-    delay: 0.2,
-    distance: `1rem`,
-    duration: 0.5,
-  });
-
-  const {
-    ref: contactRef,
-    ctrls: contactCtrls,
-    vars: contactVars,
-  } = useAnimateIn({
-    delay: 0.2,
-    distance: `1rem`,
-    duration: 0.5,
-  });
-
   return (
     <Nav navOpen={navOpen}>
       <Link href="/" passHref>
-        <Item
-          ref={projectsRef}
-          initial="hidden"
-          animate={projectsCtrls}
-          variants={projectsVars}
-        >
-          Projects
-        </Item>
+        <Item delay="0.5s">Projects</Item>
       </Link>
       <Link href="/blog" passHref>
-        <Item
-          ref={articlesRef}
-          initial="hidden"
-          animate={articlesCtrls}
-          variants={articlesVars}
-        >
-          Articles
-        </Item>
+        <Item delay="0.6s">Articles</Item>
       </Link>
       <Link href="/contact" passHref>
-        <Item
-          ref={contactRef}
-          initial="hidden"
-          animate={contactCtrls}
-          variants={contactVars}
-        >
-          Contact
-        </Item>
+        <Item delay="0.7s">Contact</Item>
       </Link>
     </Nav>
   );

@@ -8,6 +8,7 @@ import GlobalStyle from "../styles/globals";
 import "../styles/globals.css";
 
 const theme = {
+  easeout: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
   padding: {
     sm: "var(--padding-sm)",
     md: "var(--padding-md)",

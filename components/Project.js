@@ -160,7 +160,7 @@ export default function Project({ project, reversed }) {
     threshold: 0.25,
   });
 
-  const imageYOffset = isSmall ? [`0px`, `-40px`] : [`0px`, `-80px`];
+  const imageYOffset = isSmall ? [`0px`, `-20px`] : [`20px`, `-20px`];
 
   // Content animation
   const {
@@ -168,11 +168,10 @@ export default function Project({ project, reversed }) {
     ctrls: contentCtrls,
     vars: contentVars,
   } = useFadeIn({
-    delay: 0.1,
     threshold: 0.5,
   });
 
-  const contentYOffset = isSmall ? [`0px`, `-120px`] : [`120px`, `-120px`];
+  const contentYOffset = isSmall ? [`0px`, `-80px`] : [`80px`, `-80px`];
 
   // Tags animation
   const {
@@ -180,11 +179,10 @@ export default function Project({ project, reversed }) {
     ctrls: tagsCtrls,
     vars: tagsVars,
   } = useFadeIn({
-    delay: 0.2,
     threshold: 0.5,
   });
 
-  const tagsYOffset = isSmall ? [`-40px`, `0px`] : [`-60px`, `60px`];
+  const tagsYOffset = isSmall ? [`-20px`, `0px`] : [`-20px`, `20px`];
 
   return (
     <Section>

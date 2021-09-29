@@ -106,11 +106,11 @@ export default function HeroHome({ data }) {
     ref: introRef,
     ctrls: introCtrls,
     vars: introVars,
-  } = useAnimateIn({ delay: 0.5 });
+  } = useAnimateIn({ delay: 0.25 });
 
   // Name animation
-  const josephYOffset = isSmall ? [`0px`, `0px`] : [`-40px`, `40px`];
-  const collicoatYOffset = isSmall ? [`0px`, `0px`] : [`80px`, `0px`];
+  const josephYOffset = isSmall ? [`0px`, `0px`] : [`-20px`, `20px`];
+  const collicoatYOffset = isSmall ? [`0px`, `0px`] : [`40px`, `0px`];
 
   return (
     <Section>
