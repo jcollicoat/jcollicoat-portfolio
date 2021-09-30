@@ -7,6 +7,7 @@ import PageContent from "../components/PageContent";
 const homepageQuery = `*[_type == "page" && name == "Homepage"][0] {
   meta_title,
   meta_description,
+  "meta_image": meta_image.asset->url,
   name,
   uses_light_theme,
   content[] {
@@ -45,6 +46,7 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ pageData, pageContent }) {
+  console.log(pageData);
   return (
     <>
       <Head>
@@ -61,11 +63,7 @@ export default function HomePage({ pageData, pageContent }) {
           content="Joseph Collicoat"
           key="ogsitename"
         />
-        <meta
-          property="og:image"
-          content="https://dev.josephcollicoat.com/meta_image.png"
-          key="ogimage"
-        />
+        <meta property="og:image" content={pageData.meta_image} key="ogimage" />
         <meta
           property="og:url"
           content="https://dev.josephcollicoat.com"

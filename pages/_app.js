@@ -20,9 +20,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <ParallaxProvider>
-        <GlobalStyle />
-        {/*<MouseCursor />*/}
         <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          {/*<MouseCursor />*/}
           <Header />
           <Component {...pageProps} />
         </ThemeProvider>

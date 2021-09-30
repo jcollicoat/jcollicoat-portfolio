@@ -12,20 +12,19 @@ import * as josephData from "../../lotties/joseph.json";
 import * as collicoatData from "../../lotties/collicoat.json";
 
 const Section = styled.section`
-  margin: 10rem 0;
-  mix-blend-mode: difference;
+  margin: 15rem 0 10rem 0;
 `;
 
-const Joseph = styled(Parallax)`
+const Joseph = styled.div`
   grid-column: 1 / -1;
 
   @media (min-width: 800px) {
-    grid-column: 1 / 9;
+    grid-column: 1 / 13;
     grid-row: 1 / 3;
   }
 
   @media (min-width: 1200px) {
-    grid-column: 2 / 11;
+    grid-column: 3 / 13;
   }
 
   @media (min-width: 1600px) {
@@ -33,16 +32,16 @@ const Joseph = styled(Parallax)`
   }
 `;
 
-const Collicoat = styled(Parallax)`
+const Collicoat = styled.div`
   grid-column: 1 / -1;
 
   @media (min-width: 800px) {
-    grid-column: 9 / -1;
+    grid-column: 13 / -1;
     grid-row: 2 / 5;
   }
 
   @media (min-width: 1200px) {
-    grid-column: 11 / -2;
+    grid-column: 13 / -3;
   }
 
   @media (min-width: 1600px) {
@@ -54,18 +53,19 @@ const Intro = styled(motion.div)`
   grid-column: 1 / -1;
   margin-top: ${(props) => props.theme.padding.lg};
   max-width: 30rem;
+  //mix-blend-mode: difference;
 
   @media (min-width: 400px) {
     grid-column: 2 / -2;
   }
 
   @media (min-width: 800px) {
-    grid-column: 1 / 8;
+    grid-column: 1 / 11;
     grid-row: 3 / 3;
   }
 
   @media (min-width: 1200px) {
-    grid-column: 2 / 8;
+    grid-column: 3 / 9;
   }
 
   @media (min-width: 1600px) {
@@ -73,9 +73,13 @@ const Intro = styled(motion.div)`
   }
 `;
 
-const Name = styled.h1`
+const Heading = styled.h1`
   font-weight: 500;
   margin-bottom: 1rem;
+`;
+
+const Subheading = styled.p`
+  line-height: 1.25;
 `;
 
 const CTA = styled.a`
@@ -101,6 +105,9 @@ export default function HeroHome({ data }) {
   // Media query for parallax
   const isSmall = useMediaQuery("(max-width: 800px)");
 
+  // Intro parallax
+  const introYOffset = isSmall ? [`0px`, `-20px`] : [`20px`, `-20px`];
+
   // Intro animation
   const {
     ref: introRef,
@@ -108,14 +115,10 @@ export default function HeroHome({ data }) {
     vars: introVars,
   } = useAnimateIn({ delay: 0.25 });
 
-  // Name animation
-  const josephYOffset = isSmall ? [`0px`, `0px`] : [`-20px`, `20px`];
-  const collicoatYOffset = isSmall ? [`0px`, `0px`] : [`40px`, `0px`];
-
   return (
     <Section>
       <SiteGrid>
-        <Joseph y={josephYOffset}>
+        <Joseph>
           <Lottie
             isClickToPauseDisabled={true}
             options={{
@@ -125,7 +128,7 @@ export default function HeroHome({ data }) {
             }}
           />
         </Joseph>
-        <Collicoat y={collicoatYOffset}>
+        <Collicoat>
           <Lottie
             isClickToPauseDisabled={true}
             options={{
@@ -141,25 +144,27 @@ export default function HeroHome({ data }) {
           animate={introCtrls}
           variants={introVars}
         >
-          <Name>{data.heading}</Name>
-          <p>{data.intro}</p>
-          <CTA>
-            <CTAIcon
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              height="100%"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <polyline points="19 12 12 19 5 12"></polyline>
-            </CTAIcon>
-            {data.cta}
-          </CTA>
+          <Parallax y={introYOffset}>
+            <Heading>{data.heading}</Heading>
+            <Subheading>{data.intro}</Subheading>
+            <CTA>
+              <CTAIcon
+                xmlns="http://www.w3.org/2000/svg"
+                width="100%"
+                height="100%"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </CTAIcon>
+              {data.cta}
+            </CTA>
+          </Parallax>
         </Intro>
       </SiteGrid>
     </Section>

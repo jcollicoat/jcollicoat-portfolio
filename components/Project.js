@@ -13,24 +13,21 @@ const Section = styled.section`
   margin: 10rem 0;
 `;
 
-const ImageParallax = styled(Parallax)`
-  grid-column: ${(props) => (props.reversed ? `2 / -1` : `1 / -2`)};
+const ImageContainer = styled(motion.div)`
+  background-color: #000000;
+  grid-column: ${(props) => (props.reversed ? `3 / -1` : `1 / -3`)};
+  opacity: 0.5;
+  padding-bottom: 60%;
+  position: relative;
 
   @media (min-width: 1200px) {
-    grid-column: ${(props) => (props.reversed ? `-1 / -14` : `1 / 14`)};
+    grid-column: ${(props) => (props.reversed ? `-1 / -17` : `1 / 17`)};
     grid-row: 1 / 1;
   }
 
   @media (min-width: 1600px) {
-    grid-column: ${(props) => (props.reversed ? `-1 / -20` : `1 / 20`)};
+    grid-column: ${(props) => (props.reversed ? `-1 / -19` : `1 / 19`)};
   }
-`;
-
-const ImageContainer = styled(motion.div)`
-  background-color: #000000;
-  opacity: 0.5;
-  padding-bottom: 60%;
-  position: relative;
 `;
 
 const ImageOverlay = styled.div`
@@ -63,7 +60,7 @@ const ImageOverlay = styled.div`
 const Type = styled.div`
   left: ${(props) => (props.reversed ? `auto` : `0.5rem`)};
   line-height: 1;
-  mix-blend-mode: difference;
+  //mix-blend-mode: difference;
   opacity: 1;
   position: absolute;
   right: ${(props) => (props.reversed ? `0.5rem` : `auto`)};
@@ -74,9 +71,9 @@ const Type = styled.div`
 `;
 
 const Content = styled(motion.div)`
-  grid-column: ${(props) => (props.reversed ? `3 / -2` : `2 / -3`)};
+  grid-column: ${(props) => (props.reversed ? `5 / -3` : `3 / -5`)};
   margin-top: -1.5rem;
-  mix-blend-mode: difference;
+  //mix-blend-mode: difference;
 
   @media (min-width: 800px) {
     margin-top: -2rem;
@@ -84,13 +81,9 @@ const Content = styled(motion.div)`
 
   @media (min-width: 1200px) {
     align-self: center;
-    grid-column: ${(props) => (props.reversed ? `2 / -12` : `12 / -2`)};
+    grid-column: ${(props) => (props.reversed ? `2 / -16` : `16 / -2`)};
     grid-row: 1 / 1;
     margin-top: 0;
-  }
-
-  @media (min-width: 1600px) {
-    grid-column: ${(props) => (props.reversed ? `2 / -16` : `16 / -2`)};
   }
 `;
 
@@ -115,6 +108,7 @@ const Title = styled(motion.h2)`
 `;
 
 const Description = styled(motion.div)`
+  line-height: 1.25;
   max-width: 30rem;
 `;
 
@@ -160,8 +154,6 @@ export default function Project({ project, reversed }) {
     threshold: 0.25,
   });
 
-  const imageYOffset = isSmall ? [`0px`, `-20px`] : [`20px`, `-20px`];
-
   // Content animation
   const {
     ref: contentRef,
@@ -189,28 +181,27 @@ export default function Project({ project, reversed }) {
       <Link href={`/projects/${project.slug}`}>
         <a>
           <SiteGrid relative>
-            <ImageParallax reversed={reversed} y={imageYOffset}>
-              <ImageContainer
-                ref={imageRef}
-                initial="hidden"
-                animate={imageCtrls}
-                variants={imageVars}
-              >
-                <Image
-                  src={project.image}
-                  layout="fill"
-                  objectFit="cover"
-                  quality="100"
-                  placeholder="blur"
-                  blurDataURL={`${project.image}?w=10`}
-                  alt=""
-                />
-                <ImageOverlay reversed={reversed} />
-                {project.is_interactive && (
-                  <Type reversed={reversed}>Interactive</Type>
-                )}
-              </ImageContainer>
-            </ImageParallax>
+            <ImageContainer
+              ref={imageRef}
+              initial="hidden"
+              animate={imageCtrls}
+              variants={imageVars}
+              reversed={reversed}
+            >
+              <Image
+                src={project.image}
+                layout="fill"
+                objectFit="cover"
+                quality="100"
+                placeholder="blur"
+                blurDataURL={`${project.image}?w=10`}
+                alt=""
+              />
+              <ImageOverlay reversed={reversed} />
+              {project.is_interactive && (
+                <Type reversed={reversed}>Interactive</Type>
+              )}
+            </ImageContainer>
             <Content
               ref={contentRef}
               initial="hidden"

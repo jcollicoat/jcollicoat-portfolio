@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
     // Disable cursor on mouse-controlled devices
     @media (hover: hover) and (pointer: fine) {
-      //cursor: none;
+      //cursor: none !important;
     }
   }
 

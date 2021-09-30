@@ -3,14 +3,14 @@ import styled from "styled-components";
 
 const Logo = styled.svg`
   cursor: pointer;
-  grid-column: 1 / 1;
+  grid-column: 1 / 2;
   height: 3rem;
   pointer-events: auto;
   width: 3rem;
   z-index: 101;
 
-  @media (min-width: 1200px) {
-    grid-column: 2 / 2;
+  @media (min-width: 800px) {
+    grid-column: 2 / 3;
   }
 `;
 

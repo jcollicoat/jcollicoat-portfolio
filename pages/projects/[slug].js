@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Head from "next/head";
 
 import client from "../../lib/sanity";
+
+import HeroProject from "../../components/HeroProject";
 
 const slugsQuery = `*[_type == "project" && defined(slug.current)][].slug.current`;
 
@@ -9,6 +12,7 @@ const projectQuery = `{
     meta_title,
     meta_description,
     name,
+    intro,
     tags[]-> {
       name
     },
@@ -40,8 +44,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectPage({ projectData }) {
-  console.log(projectData);
-
   return (
     <>
       <Head>
@@ -49,10 +51,7 @@ export default function ProjectPage({ projectData }) {
         <meta name="description" content={projectData.meta_description} />
       </Head>
       <main>
-        <h1>{projectData.name}</h1>
-        {projectData.tags.map((tag, index) => {
-          return <div key={index}>{tag.name}</div>;
-        })}
+        <HeroProject data={projectData} />
       </main>
     </>
   );
