@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { useRouter } from "next/dist/client/router";
 
 import MouseCursor from "../components/global/MouseCursor";
 import Header from "../components/Header";
@@ -17,8 +18,12 @@ const theme = {
   },
 };
 
-function MyApp({ Component, pageProps, router }) {
-  const route = router.route;
+function MyApp({ Component, pageProps }) {
+  // Get page path to use as key in components
+  // so page transitions work between dynamic pages
+  // of the same type
+  const { asPath } = useRouter();
+  console.log(asPath);
 
   return (
     <>
@@ -34,7 +39,7 @@ function MyApp({ Component, pageProps, router }) {
               typeof window !== "undefined" && window.scrollTo(0, 0)
             }
           >
-            <Component {...pageProps} key={route} />
+            <Component {...pageProps} key={asPath} />
           </AnimatePresence>
         </ThemeProvider>
       </ParallaxProvider>
