@@ -83,17 +83,17 @@ export default function HeaderNav({ handleClick, navOpen }) {
   return (
     <Nav navOpen={navOpen}>
       <Link href="/" passHref scroll={false}>
-        <Item delay="0.5s" onClick={handleClick}>
+        <Item delay="0.5s" onClick={navOpen && handleClick}>
           Projects
         </Item>
       </Link>
       <Link href="/articles" passHref scroll={false}>
-        <Item delay="0.6s" onClick={handleClick}>
+        <Item delay="0.6s" onClick={navOpen && handleClick}>
           Articles
         </Item>
       </Link>
       <Link href="/contact" passHref scroll={false}>
-        <Item delay="0.7s" onClick={handleClick}>
+        <Item delay="0.7s" onClick={navOpen && handleClick}>
           Contact
         </Item>
       </Link>
