@@ -79,17 +79,23 @@ const Item = styled.a`
   }
 `;
 
-export default function HeaderNav({ navOpen }) {
+export default function HeaderNav({ handleClick, navOpen }) {
   return (
     <Nav navOpen={navOpen}>
       <Link href="/" passHref scroll={false}>
-        <Item delay="0.5s">Projects</Item>
+        <Item delay="0.5s" onClick={handleClick}>
+          Projects
+        </Item>
       </Link>
       <Link href="/articles" passHref scroll={false}>
-        <Item delay="0.6s">Articles</Item>
+        <Item delay="0.6s" onClick={handleClick}>
+          Articles
+        </Item>
       </Link>
       <Link href="/contact" passHref scroll={false}>
-        <Item delay="0.7s">Contact</Item>
+        <Item delay="0.7s" onClick={handleClick}>
+          Contact
+        </Item>
       </Link>
     </Nav>
   );

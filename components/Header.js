@@ -29,7 +29,7 @@ export default function Header() {
       <SiteGrid>
         <HeaderLogo />
         <HeaderButton handleClick={handleClick} navOpen={navOpen} />
-        <HeaderNav navOpen={navOpen} />
+        <HeaderNav handleClick={handleClick} navOpen={navOpen} />
       </SiteGrid>
     </Wrapper>
   );

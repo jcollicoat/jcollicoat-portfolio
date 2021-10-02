@@ -19,11 +19,7 @@ const variants = {
 export default function Layout({ children, theme }) {
   // Update background-color on body to reduce jank
   useEffect(() => {
-    const updateBackground = setTimeout(() => {
-      document.body.style.backgroundColor = `${theme.background}` || "#111111";
-    }, 250);
-
-    return () => clearTimeout(updateBackground);
+    document.body.style.backgroundColor = `${theme.background}` || "#111111";
   }, [theme.background]);
 
   return (
@@ -33,7 +29,8 @@ export default function Layout({ children, theme }) {
       animate="enter"
       exit="exit"
       transition={{
-        duration: 0.25,
+        delay: 0.25,
+        duration: 0.5,
         ease: [0.2, 0.65, 0.3, 0.9],
       }}
       theme={theme}

@@ -18,6 +18,8 @@ const theme = {
 };
 
 function MyApp({ Component, pageProps, router }) {
+  const route = router.route;
+
   return (
     <>
       <ParallaxProvider>
@@ -32,7 +34,7 @@ function MyApp({ Component, pageProps, router }) {
               typeof window !== "undefined" && window.scrollTo(0, 0)
             }
           >
-            <Component {...pageProps} />
+            <Component {...pageProps} key={route} />
           </AnimatePresence>
         </ThemeProvider>
       </ParallaxProvider>
