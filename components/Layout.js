@@ -11,9 +11,27 @@ const Main = styled(motion.main)`
 `;
 
 const variants = {
-  hidden: { opacity: 0, x: -32 },
-  enter: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 32 },
+  hidden: {
+    opacity: 0,
+    x: -32,
+  },
+  enter: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: 0.25,
+      duration: 1,
+      ease: [0.2, 0.65, 0.3, 0.9],
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: 32,
+    transition: {
+      duration: 0.25,
+      ease: [0.2, 0.65, 0.3, 0.9],
+    },
+  },
 };
 
 export default function Layout({ children, theme }) {
@@ -28,11 +46,6 @@ export default function Layout({ children, theme }) {
       initial="hidden"
       animate="enter"
       exit="exit"
-      transition={{
-        delay: 0.25,
-        duration: 0.5,
-        ease: [0.2, 0.65, 0.3, 0.9],
-      }}
       theme={theme}
     >
       {children}
