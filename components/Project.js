@@ -181,7 +181,7 @@ export default function Project({ project, reversed }) {
 
   return (
     <Section>
-      <Link href={`/projects/${project.slug}`}>
+      <Link href={`/projects/${project.slug}`} scroll={false}>
         <a>
           <SiteGrid relative>
             <ImageContainer

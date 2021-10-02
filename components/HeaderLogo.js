@@ -16,7 +16,7 @@ const Logo = styled.svg`
 
 export default function HeaderLogo() {
   return (
-    <Link href="/" passHref>
+    <Link href="/" passHref scroll={false}>
       <Logo
         fill="#ffffff"
         height="100%"

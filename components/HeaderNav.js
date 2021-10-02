@@ -82,13 +82,13 @@ const Item = styled.a`
 export default function HeaderNav({ navOpen }) {
   return (
     <Nav navOpen={navOpen}>
-      <Link href="/" passHref>
+      <Link href="/" passHref scroll={false}>
         <Item delay="0.5s">Projects</Item>
       </Link>
-      <Link href="/articles" passHref>
+      <Link href="/articles" passHref scroll={false}>
         <Item delay="0.6s">Articles</Item>
       </Link>
-      <Link href="/contact" passHref>
+      <Link href="/contact" passHref scroll={false}>
         <Item delay="0.7s">Contact</Item>
       </Link>
     </Nav>

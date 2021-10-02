@@ -1,4 +1,5 @@
 import { ThemeProvider } from "styled-components";
+import { AnimatePresence } from "framer-motion";
 import { ParallaxProvider } from "react-scroll-parallax";
 
 import MouseCursor from "../components/global/MouseCursor";
@@ -16,7 +17,7 @@ const theme = {
   },
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   return (
     <>
       <ParallaxProvider>
@@ -24,7 +25,15 @@ function MyApp({ Component, pageProps }) {
           <GlobalStyle />
           {/*<MouseCursor />*/}
           <Header />
-          <Component {...pageProps} />
+          <AnimatePresence
+            exitBeforeEnter
+            initial={false}
+            onExitComplete={() =>
+              typeof window !== "undefined" && window.scrollTo(0, 0)
+            }
+          >
+            <Component {...pageProps} />
+          </AnimatePresence>
         </ThemeProvider>
       </ParallaxProvider>
     </>
