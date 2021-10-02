@@ -2,11 +2,17 @@ import { useEffect } from "react";
 import { useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-export default function useFadeIn({ customVars, delay, duration, threshold }) {
+export default function useFadeIn({
+  customVars,
+  delay,
+  duration,
+  repeat,
+  threshold,
+}) {
   const ctrls = useAnimation();
   const { ref, inView } = useInView({
     threshold: threshold || 0.75,
-    triggerOnce: true,
+    triggerOnce: repeat ? false : true,
   });
 
   useEffect(() => {

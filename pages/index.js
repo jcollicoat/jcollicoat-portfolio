@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import client from "../lib/sanity";
 
+import Layout from "../components/Layout";
 import PageContent from "../components/PageContent";
 
 const homepageQuery = `*[_type == "page" && name == "Homepage"][0] {
@@ -9,7 +10,8 @@ const homepageQuery = `*[_type == "page" && name == "Homepage"][0] {
   meta_description,
   "meta_image": meta_image.asset->url,
   name,
-  uses_light_theme,
+  theme,
+  custom_theme,
   content[] {
     _type == "hero_home" => {
       _type,
@@ -46,7 +48,28 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ pageData, pageContent }) {
-  console.log(pageData);
+  let theme = {
+    background: "#111111",
+    text: "#ffffff",
+  };
+
+  if (pageData.theme === "dark") {
+    theme = {
+      background: "#111111",
+      text: "#ffffff",
+    };
+  } else if (pageData.theme === "light") {
+    theme = {
+      background: "#ffffff",
+      text: "#111111",
+    };
+  } else if (pageData.theme === "custom") {
+    theme = {
+      background: pageData.custom_theme.background.hex,
+      text: pageData.custom_theme.text.hex,
+    };
+  }
+
   return (
     <>
       <Head>
@@ -73,9 +96,9 @@ export default function HomePage({ pageData, pageContent }) {
         <meta name="twitter:creator" content="@jcollicoat" key="twhandle" />
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
-      <main>
+      <Layout theme={theme}>
         <PageContent sections={pageContent} />
-      </main>
+      </Layout>
     </>
   );
 }

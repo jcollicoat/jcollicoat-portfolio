@@ -64,7 +64,7 @@ const GlobalStyle = createGlobalStyle`
     );
     background-size: 300% 300%;
     */
-    background-color: #111111;
+    background-color: #000000;
     min-height: 100vh;
   }
 

@@ -12,7 +12,7 @@ import * as josephData from "../../lotties/joseph.json";
 import * as collicoatData from "../../lotties/collicoat.json";
 
 const Section = styled.section`
-  margin: 15rem 0 10rem 0;
+  margin: 0 0 10rem 0;
 `;
 
 const Joseph = styled.div`

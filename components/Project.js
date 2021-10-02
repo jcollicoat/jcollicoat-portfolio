@@ -87,7 +87,7 @@ const Content = styled(motion.div)`
   }
 `;
 
-const Title = styled(motion.h2)`
+const Title = styled.h2`
   font-family: "Ultrasolar Web";
   font-size: 3rem;
   font-weight: 400;
@@ -107,7 +107,7 @@ const Title = styled(motion.h2)`
   }
 `;
 
-const Description = styled(motion.div)`
+const Description = styled.div`
   line-height: 1.25;
   max-width: 30rem;
 `;
@@ -151,6 +151,7 @@ export default function Project({ project, reversed }) {
     ctrls: imageCtrls,
     vars: imageVars,
   } = useFadeIn({
+    repeat: true,
     threshold: 0.25,
   });
 
@@ -160,6 +161,7 @@ export default function Project({ project, reversed }) {
     ctrls: contentCtrls,
     vars: contentVars,
   } = useFadeIn({
+    repeat: true,
     threshold: 0.5,
   });
 
@@ -171,6 +173,7 @@ export default function Project({ project, reversed }) {
     ctrls: tagsCtrls,
     vars: tagsVars,
   } = useFadeIn({
+    repeat: true,
     threshold: 0.5,
   });
 

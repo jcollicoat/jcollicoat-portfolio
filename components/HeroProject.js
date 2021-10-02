@@ -7,7 +7,7 @@ import useFadeIn from "../hooks/useFadeIn";
 import SiteGrid from "./global/SiteGrid";
 
 const Section = styled.section`
-  margin: 15rem 0 10rem 0;
+  margin: 0 0 10rem 0;
 `;
 
 const Title = styled.h1`
@@ -15,11 +15,12 @@ const Title = styled.h1`
   font-size: 4rem;
   font-weight: 400;
   grid-column: 1 / -1;
+  line-height: 0.9;
   margin-bottom: 1rem;
 
   @media (min-width: 800px) {
     font-size: 6rem;
-    grid-column: 4 / 17;
+    grid-column: 4 / 21;
   }
 
   @media (min-width: 1200px) {

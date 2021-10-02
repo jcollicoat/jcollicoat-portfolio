@@ -85,7 +85,7 @@ export default function HeaderNav({ navOpen }) {
       <Link href="/" passHref>
         <Item delay="0.5s">Projects</Item>
       </Link>
-      <Link href="/blog" passHref>
+      <Link href="/articles" passHref>
         <Item delay="0.6s">Articles</Item>
       </Link>
       <Link href="/contact" passHref>
