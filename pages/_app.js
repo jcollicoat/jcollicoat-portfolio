@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
           <Header />
           <AnimatePresence
             exitBeforeEnter
-            initial={false}
+            //initial={false}
             onExitComplete={() =>
               typeof window !== "undefined" && window.scrollTo(0, 0)
             }

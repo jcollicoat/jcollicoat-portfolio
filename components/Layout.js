@@ -13,7 +13,7 @@ const Main = styled(motion.main)`
 const variants = {
   hidden: {
     opacity: 0,
-    x: -32,
+    //x: -32,
   },
   enter: {
     opacity: 1,
@@ -26,7 +26,7 @@ const variants = {
   },
   exit: {
     opacity: 0,
-    x: 32,
+    //x: 32,
     transition: {
       duration: 0.25,
       ease: [0.2, 0.65, 0.3, 0.9],

@@ -1,35 +1,14 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Parallax } from "react-scroll-parallax";
 
-import useFadeIn from "../hooks/useFadeIn";
+import useAnimateIn from "../hooks/useAnimateIn";
 
 import SiteGrid from "./global/SiteGrid";
 
+import HeroProjectTitle from "./HeroProjectTitle";
+
 const Section = styled.section`
   margin: 0 0 10rem 0;
-`;
-
-const Title = styled.h1`
-  font-family: "Ultrasolar Web";
-  font-size: 4rem;
-  font-weight: 400;
-  grid-column: 1 / -1;
-  line-height: 0.9;
-  margin-bottom: 1rem;
-
-  @media (min-width: 800px) {
-    font-size: 6rem;
-    grid-column: 4 / 21;
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 8rem;
-  }
-
-  @media (min-width: 1600px) {
-    font-size: 10rem;
-  }
 `;
 
 const Content = styled.div`
@@ -52,20 +31,17 @@ const Content = styled.div`
   }
 `;
 
-const Intro = styled.p`
+const Intro = styled(motion.p)`
   line-height: 1.75;
-`;
-
-const TagsParallax = styled(Parallax)`
-  left: 0;
-  position: absolute;
-  top: 0;
 `;
 
 const Tags = styled(motion.div)`
   display: flex;
   flex-direction: column;
   font-size: 0.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
   width: 1rem;
 
   @media (min-width: 800px) {
@@ -85,57 +61,49 @@ const Tag = styled.div`
 `;
 
 export default function HeroProject({ data }) {
-  // Title animation
-  const {
-    ref: titleRef,
-    ctrls: titleCtrls,
-    vars: titleVars,
-  } = useFadeIn({
-    threshold: 0.5,
-  });
-
   // Intro animation
   const {
     ref: introRef,
     ctrls: introCtrls,
     vars: introVars,
-  } = useFadeIn({
+  } = useAnimateIn({
+    delay: 0.75,
     threshold: 0.5,
   });
-
-  const introYOffset = [`0px`, `40px`];
 
   // Tags animation
   const {
     ref: tagsRef,
     ctrls: tagsCtrls,
     vars: tagsVars,
-  } = useFadeIn({
+  } = useAnimateIn({
+    delay: 0.5,
     threshold: 0.5,
   });
-
-  const tagsYOffset = [`0px`, `80px`];
 
   return (
     <Section>
       <SiteGrid>
-        <Title>{data.name}</Title>
+        <HeroProjectTitle title={data.name} />
         <Content>
-          <Parallax y={introYOffset}>
-            <Intro>{data.intro}</Intro>
-          </Parallax>
-          <TagsParallax y={tagsYOffset}>
-            <Tags
-              ref={tagsRef}
-              initial="hidden"
-              animate={tagsCtrls}
-              variants={tagsVars}
-            >
-              {data.tags.map((tag, index) => {
-                return <Tag key={index}>{tag.name}</Tag>;
-              })}
-            </Tags>
-          </TagsParallax>
+          <Intro
+            ref={introRef}
+            initial="hidden"
+            animate={introCtrls}
+            variants={introVars}
+          >
+            {data.intro}
+          </Intro>
+          <Tags
+            ref={tagsRef}
+            initial="hidden"
+            animate={tagsCtrls}
+            variants={tagsVars}
+          >
+            {data.tags.map((tag, index) => {
+              return <Tag key={index}>{tag.name}</Tag>;
+            })}
+          </Tags>
         </Content>
       </SiteGrid>
     </Section>

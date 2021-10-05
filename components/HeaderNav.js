@@ -49,7 +49,7 @@ const Item = styled.a`
     }
   }
 
-  animation: appear 0.25s ${(props) => props.theme.easeout} both;
+  animation: appear 1s ${(props) => props.theme.easeout} both;
   animation-delay: ${(props) => props.delay};
   margin: ${(props) => props.theme.padding.lg} 0;
   position: relative;
@@ -67,7 +67,7 @@ const Item = styled.a`
       right: 0;
       transform: scaleX(0);
       transform-origin: top right;
-      transition: transform 0.25s ease-out;
+      transition: transform 0.25s ${(props) => props.theme.easeout};
     }
 
     &:hover {

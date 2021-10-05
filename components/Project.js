@@ -5,9 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 import useFadeIn from "../hooks/useFadeIn";
+import useAnimateIn from "../hooks/useAnimateIn";
 import useMediaQuery from "../hooks/useMediaQuery";
 
 import SiteGrid from "./global/SiteGrid";
+
+import ProjectTitle from "./ProjectTitle";
 
 const Section = styled.section`
   margin: 10rem 0;
@@ -70,7 +73,7 @@ const Type = styled.div`
   z-index: 1;
 `;
 
-const Content = styled(motion.div)`
+const Content = styled.div`
   grid-column: ${(props) => (props.reversed ? `5 / -3` : `3 / -5`)};
   margin-top: -1.5rem;
   //mix-blend-mode: difference;
@@ -87,42 +90,19 @@ const Content = styled(motion.div)`
   }
 `;
 
-const Title = styled.h2`
-  font-family: "Ultrasolar Web";
-  font-size: 3rem;
-  font-weight: 400;
-  line-height: 0.9;
-  margin-bottom: 1rem;
-
-  @media (min-width: 800px) {
-    font-size: 4rem;
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 5rem;
-  }
-
-  @media (min-width: 1600px) {
-    font-size: 6rem;
-  }
-`;
-
-const Description = styled.div`
+const Description = styled(motion.div)`
   line-height: 1.25;
   max-width: 30rem;
-`;
-
-const TagsParallax = styled(Parallax)`
-  left: ${(props) => (props.reversed ? props.theme.padding.md : `auto`)};
-  position: absolute;
-  right: ${(props) => (props.reversed ? `auto` : props.theme.padding.md)};
-  top: 0;
 `;
 
 const Tags = styled(motion.div)`
   display: flex;
   flex-direction: column;
   font-size: 0.5rem;
+  left: ${(props) => (props.reversed ? props.theme.padding.md : `auto`)};
+  position: absolute;
+  right: ${(props) => (props.reversed ? `auto` : props.theme.padding.md)};
+  top: 0;
   width: 1rem;
 
   @media (min-width: 800px) {
@@ -151,33 +131,31 @@ export default function Project({ project, reversed }) {
     ctrls: imageCtrls,
     vars: imageVars,
   } = useFadeIn({
-    repeat: true,
     threshold: 0.25,
   });
 
-  // Content animation
+  // Content parallax
+  const contentYOffset = isSmall ? [`0px`, `-80px`] : [`80px`, `-80px`];
+
+  // Intro animation
   const {
-    ref: contentRef,
-    ctrls: contentCtrls,
-    vars: contentVars,
-  } = useFadeIn({
-    repeat: true,
+    ref: introRef,
+    ctrls: introCtrls,
+    vars: introVars,
+  } = useAnimateIn({
+    delay: 0.5,
     threshold: 0.5,
   });
-
-  const contentYOffset = isSmall ? [`0px`, `-80px`] : [`80px`, `-80px`];
 
   // Tags animation
   const {
     ref: tagsRef,
     ctrls: tagsCtrls,
     vars: tagsVars,
-  } = useFadeIn({
-    repeat: true,
+  } = useAnimateIn({
+    delay: 0.75,
     threshold: 0.5,
   });
-
-  const tagsYOffset = isSmall ? [`-20px`, `0px`] : [`-20px`, `20px`];
 
   return (
     <Section>
@@ -205,31 +183,30 @@ export default function Project({ project, reversed }) {
                 <Type reversed={reversed}>Interactive</Type>
               )}
             </ImageContainer>
-            <Content
-              ref={contentRef}
-              initial="hidden"
-              animate={contentCtrls}
-              variants={contentVars}
-              reversed={reversed}
-            >
+            <Content reversed={reversed}>
               <Parallax y={contentYOffset}>
-                <Title>{project.name}</Title>
-                <Description>{project.description}</Description>
+                <ProjectTitle title={project.name} />
+                <Description
+                  ref={introRef}
+                  initial="hidden"
+                  animate={introCtrls}
+                  variants={introVars}
+                >
+                  {project.description}
+                </Description>
               </Parallax>
             </Content>
-            <TagsParallax y={tagsYOffset} reversed={reversed}>
-              <Tags
-                ref={tagsRef}
-                initial="hidden"
-                animate={tagsCtrls}
-                variants={tagsVars}
-                reversed={reversed}
-              >
-                {project.tags.map((tag, index) => {
-                  return <Tag key={index}>{tag.name}</Tag>;
-                })}
-              </Tags>
-            </TagsParallax>
+            <Tags
+              ref={tagsRef}
+              initial="hidden"
+              animate={tagsCtrls}
+              variants={tagsVars}
+              reversed={reversed}
+            >
+              {project.tags.map((tag, index) => {
+                return <Tag key={index}>{tag.name}</Tag>;
+              })}
+            </Tags>
           </SiteGrid>
         </a>
       </Link>

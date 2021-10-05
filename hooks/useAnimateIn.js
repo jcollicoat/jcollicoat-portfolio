@@ -26,7 +26,7 @@ export default function useAnimateIn({
   }, [ctrls, inView]);
 
   const vars = customVars || {
-    hidden: { opacity: 0, y: distance || `2rem` },
+    hidden: { opacity: 0, y: distance || `1rem` },
     visible: {
       opacity: 1,
       y: 0,
