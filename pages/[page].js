@@ -1,4 +1,6 @@
+import { useEffect, useContext } from "react";
 import Head from "next/head";
+import { ThemeContext } from "../contexts/ThemeStore";
 
 import client from "../lib/sanity";
 
@@ -43,27 +45,41 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Page({ pageData }) {
-  let theme = {
+  let pageTheme = {
     background: "#111111",
     text: "#ffffff",
   };
 
   if (pageData.theme === "dark") {
-    theme = {
+    pageTheme = {
       background: "#111111",
       text: "#ffffff",
     };
   } else if (pageData.theme === "light") {
-    theme = {
+    pageTheme = {
       background: "#ffffff",
       text: "#111111",
     };
   } else if (pageData.theme === "custom") {
-    theme = {
+    pageTheme = {
       background: pageData.custom_theme.background.hex,
       text: pageData.custom_theme.text.hex,
     };
   }
+
+  const { theme, switchTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    switchTheme({
+      ...theme,
+      background: pageTheme.background,
+      text: pageTheme.text,
+    });
+
+    // Update background-color on body to reduce jank
+    //document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -71,7 +87,7 @@ export default function Page({ pageData }) {
         <title>{pageData.meta_title} – Joseph Collicoat</title>
         <meta name="description" content={pageData.meta_description} />
       </Head>
-      <Layout theme={theme}>
+      <Layout>
         <div>
           <div>{pageData.name}</div>
         </div>

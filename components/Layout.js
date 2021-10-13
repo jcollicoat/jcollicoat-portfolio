@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 
 const Main = styled(motion.main)`
   background-color: ${(props) => props.theme.background || `#111111`};
   color: ${(props) => props.theme.text || "#ffffff"};
   min-height: 100vh;
   padding: 15rem 0;
+  transition: background-color 0.25s ${(props) => props.theme.easeout};
   width: 100%;
 `;
 
@@ -34,20 +34,9 @@ const variants = {
   },
 };
 
-export default function Layout({ children, theme }) {
-  // Update background-color on body to reduce jank
-  useEffect(() => {
-    document.body.style.backgroundColor = `${theme.background}` || "#111111";
-  }, [theme.background]);
-
+export default function Layout({ children }) {
   return (
-    <Main
-      variants={variants}
-      initial="hidden"
-      animate="enter"
-      exit="exit"
-      theme={theme}
-    >
+    <Main variants={variants} initial="hidden" animate="enter" exit="exit">
       {children}
     </Main>
   );

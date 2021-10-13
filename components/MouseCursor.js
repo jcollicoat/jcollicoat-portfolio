@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-import useMousePosition from "../../hooks/useMousePosition";
+import useMousePosition from "../hooks/useMousePosition";
 
 const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
   style: {
-    left: `calc(${mouseX}px - 1rem)`,
-    top: `calc(${mouseY}px - 1rem)`,
+    transform: `translate(calc(${mouseX}px - 0.5rem), calc(${mouseY}px - 0.5rem))`,
   },
 }))`
   display: none;
@@ -15,11 +14,11 @@ const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
     background-color: #ffffff;
     border-radius: 50%;
     display: block;
-    height: 2rem;
+    height: 1rem;
     mix-blend-mode: difference;
     pointer-events: none;
     position: fixed;
-    width: 2rem;
+    width: 1rem;
     z-index: 200;
   }
 `;

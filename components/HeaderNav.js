@@ -9,7 +9,6 @@ const Nav = styled.nav`
   font-weight: 500;
   height: 100vh;
   left: 0;
-  line-height: 1;
   opacity: ${(props) => (props.navOpen ? `1` : `0`)};
   padding-top: 8rem;
   position: absolute;

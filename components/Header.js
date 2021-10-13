@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import SiteGrid from "./global/SiteGrid";
+import SiteGrid from "./SiteGrid";
 
 import HeaderLogo from "./HeaderLogo";
 import HeaderButton from "./HeaderButton";

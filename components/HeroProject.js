@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { rgba } from "polished";
 import { motion } from "framer-motion";
 
 import useAnimateIn from "../hooks/useAnimateIn";
 
-import SiteGrid from "./global/SiteGrid";
+import SiteGrid from "./SiteGrid";
 
 import HeroProjectTitle from "./HeroProjectTitle";
 
@@ -51,8 +52,8 @@ const Tags = styled(motion.div)`
 `;
 
 const Tag = styled.div`
-  background-color: rgba(255, 255, 255, 0.25);
-  color: #000000;
+  background-color: ${(props) => rgba(props.theme.text, 0.25)};
+  color: ${(props) => props.theme.background};
   line-height: 1;
   margin-bottom: 0.5rem;
   padding: 0.5rem 0.25rem;

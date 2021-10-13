@@ -31,7 +31,6 @@ export default function useFadeIn({
       transition: {
         delay: delay || 0,
         duration: duration || 1,
-        ease: [0.2, 0.65, 0.3, 0.9],
       },
     },
   };

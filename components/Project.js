@@ -8,7 +8,7 @@ import useFadeIn from "../hooks/useFadeIn";
 import useAnimateIn from "../hooks/useAnimateIn";
 import useMediaQuery from "../hooks/useMediaQuery";
 
-import SiteGrid from "./global/SiteGrid";
+import SiteGrid from "./SiteGrid";
 
 import ProjectTitle from "./ProjectTitle";
 
@@ -34,29 +34,39 @@ const ImageContainer = styled(motion.div)`
 `;
 
 const ImageOverlay = styled.div`
-  background: ${(props) =>
-    props.reversed
-      ? `linear-gradient(
-    to left,
+  background: linear-gradient(
+    to bottom,
     rgba(0, 0, 0, 0.25) 0%,
     rgba(0, 0, 0, 0.75) 100%
-  )`
-      : `linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.75) 100%
-  )`};
+  );
   background-position: ${(props) => (props.reversed ? `0% 0%` : `100% 0%`)};
-  background-size: 200% 100%;
+  background-size: 100%;
   bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
-  transition: opacity 0.25s ease-out;
+  transition: opacity 1s ease;
 
   ${Section}:hover & {
     opacity: 0.5;
+  }
+
+  @media (min-width: 1200px) {
+    background: ${(props) =>
+      props.reversed
+        ? `linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  )`
+        : `linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.75) 100%
+  )`};
+    background-position: ${(props) => (props.reversed ? `0% 0%` : `100% 0%`)};
+    background-size: 200% 100%;
   }
 `;
 

@@ -1,4 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { useContext } from "react";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { ThemeContext } from "../contexts/ThemeStore";
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -64,9 +66,9 @@ const GlobalStyle = createGlobalStyle`
     );
     background-size: 300% 300%;
     */
-    background-color: #111111;
+    background-color: ${(props) => props.theme.background};
     min-height: 100vh;
-    transition: background-color 0.25s cubic-bezier(0.2, 0.65, 0.3, 0.9);
+    transition: background-color 0.25s ${(props) => props.theme.easeout};
   }
 
   a {
@@ -80,4 +82,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default GlobalStyle;
+const GlobalTheme = ({ children }) => {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {children}
+    </ThemeProvider>
+  );
+};
+
+export default GlobalTheme;

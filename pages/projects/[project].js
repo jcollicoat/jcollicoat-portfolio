@@ -1,4 +1,6 @@
+import { useEffect, useContext } from "react";
 import Head from "next/head";
+import { ThemeContext } from "../../contexts/ThemeStore";
 
 import client from "../../lib/sanity";
 
@@ -49,27 +51,41 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectPage({ projectData }) {
-  let theme = {
+  let pageTheme = {
     background: "#111111",
     text: "#ffffff",
   };
 
   if (projectData.theme === "dark") {
-    theme = {
+    pageTheme = {
       background: "#111111",
       text: "#ffffff",
     };
   } else if (projectData.theme === "light") {
-    theme = {
+    pageTheme = {
       background: "#ffffff",
       text: "#111111",
     };
   } else if (projectData.theme === "custom") {
-    theme = {
+    pageTheme = {
       background: projectData.custom_theme.background.hex,
       text: projectData.custom_theme.text.hex,
     };
   }
+
+  const { theme, switchTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    switchTheme({
+      ...theme,
+      background: pageTheme.background,
+      text: pageTheme.text,
+    });
+
+    // Update background-color on body to reduce jank
+    //document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -77,7 +93,7 @@ export default function ProjectPage({ projectData }) {
         <title>{projectData.meta_title} – Joseph Collicoat</title>
         <meta name="description" content={projectData.meta_description} />
       </Head>
-      <Layout theme={theme}>
+      <Layout>
         <HeroProject data={projectData} />
       </Layout>
     </>

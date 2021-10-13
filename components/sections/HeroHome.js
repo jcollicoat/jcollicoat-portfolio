@@ -6,7 +6,7 @@ import { Parallax } from "react-scroll-parallax";
 import useAnimateIn from "../../hooks/useAnimateIn";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
-import SiteGrid from "../global/SiteGrid";
+import SiteGrid from "../SiteGrid";
 
 import * as josephData from "../../lotties/joseph.json";
 import * as collicoatData from "../../lotties/collicoat.json";
