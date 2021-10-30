@@ -2,6 +2,7 @@ import Lottie from "react-lottie";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 import useAnimateIn from "../../hooks/useAnimateIn";
 import useMediaQuery from "../../hooks/useMediaQuery";
@@ -82,7 +83,7 @@ const Subheading = styled.p`
   line-height: 1.25;
 `;
 
-const CTA = styled.a`
+const CTA = styled(AnchorLink)`
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -147,7 +148,7 @@ export default function HeroHome({ data }) {
           <Parallax y={introYOffset}>
             <Heading>{data.heading}</Heading>
             <Subheading>{data.intro}</Subheading>
-            <CTA>
+            <CTA href="#projects-list" offset="160">
               <CTAIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="100%"

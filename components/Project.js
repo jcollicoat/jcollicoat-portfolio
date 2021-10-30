@@ -181,12 +181,12 @@ export default function Project({ project, reversed }) {
             >
               <Image
                 src={project.image}
+                blurDataURL={`${project.image}?w=10`}
+                alt=""
                 layout="fill"
                 objectFit="cover"
                 quality="100"
                 placeholder="blur"
-                blurDataURL={`${project.image}?w=10`}
-                alt=""
               />
               <ImageOverlay reversed={reversed} />
               {project.is_interactive && (

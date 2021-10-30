@@ -5,7 +5,7 @@ import { ThemeContext } from "../contexts/ThemeStore";
 import client from "../lib/sanity";
 
 import Layout from "../components/Layout";
-import PageContent from "../components/PageContent";
+import ContentMapper from "../components/ContentMapper";
 
 const homepageQuery = `*[_type == "page" && name == "Homepage"][0] {
   meta_title,
@@ -113,7 +113,7 @@ export default function HomePage({ pageData, pageContent }) {
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
-        <PageContent sections={pageContent} />
+        <ContentMapper sections={pageContent} />
       </Layout>
     </>
   );

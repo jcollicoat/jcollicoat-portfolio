@@ -13,14 +13,13 @@ const Section = styled.section`
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
   grid-column: 1 / -1;
   max-width: 40rem;
-  padding-left: 2rem;
-  position: relative;
 
   @media (min-width: 800px) {
     grid-column: 6 / -1;
-    padding-left: 3rem;
   }
 
   @media (min-width: 1200px) {
@@ -40,13 +39,12 @@ const Tags = styled(motion.div)`
   display: flex;
   flex-direction: column;
   font-size: 0.5rem;
-  left: 0;
-  position: absolute;
-  top: 0;
+  margin-right: 1rem;
   width: 1rem;
 
   @media (min-width: 800px) {
     font-size: 0.75rem;
+    margin-right: 1.75rem;
     width: 1.25rem;
   }
 `;

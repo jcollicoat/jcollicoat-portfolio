@@ -13,5 +13,5 @@ export default function ProjectsList({ data }) {
     );
   });
 
-  return <>{ProjectsMap}</>;
+  return <div id="projects-list">{ProjectsMap}</div>;
 }

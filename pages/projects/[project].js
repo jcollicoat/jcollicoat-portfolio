@@ -6,6 +6,7 @@ import client from "../../lib/sanity";
 
 import Layout from "../../components/Layout";
 import HeroProject from "../../components/HeroProject";
+import ContentMapper from "../../components/ContentMapper";
 
 const slugsQuery = `*[_type == "project" && defined(slug.current)][].slug.current`;
 
@@ -13,6 +14,7 @@ const projectQuery = `{
   "project": *[_type == "project" && slug.current == $slug][0] {
     meta_title,
     meta_description,
+    "meta_image": meta_image->url,
     name,
     intro,
     tags[]-> {
@@ -20,7 +22,85 @@ const projectQuery = `{
     },
     is_interactive,
     theme,
-    custom_theme
+    custom_theme,
+    content[] {
+      _type == "project_image" => {
+        _type,
+        "image": image.asset->url,
+        "image_is_decorative": image.is_decorative,
+        "image_alt": image.alt,
+        image_size,
+        include_caption,
+        caption,
+        include_copy,
+        copy_position,
+        copy_heading,
+        copy,
+        include_cta,
+        cta_text,
+        link_external,
+        "link_internal_type": link_internal->_type,
+        "link_internal": link_internal->slug.current,
+      },
+      _type == "project_image_grid" => {
+        _type,
+        copy_heading,
+        copy,
+        columns,
+        items[] {
+          "image": image.asset->url,
+          "image_is_decorative": image.is_decorative,
+          "image_alt": image.alt,
+          include_name,
+          name,
+          include_copy,
+          copy,
+        }
+      },
+      _type == "project_image_text" => {
+        _type,
+        "image": image.asset->url,
+        "image_is_decorative": image.is_decorative,
+        "image_alt": image.alt,
+        include_caption,
+        caption_position,
+        caption,
+        copy_position,
+        copy_heading,
+        copy,
+        include_cta,
+        cta_text,
+        link_external,
+        "link_internal_type": link_internal->_type,
+        "link_internal": link_internal->slug.current,
+      },
+      _type == "project_text" => {
+        _type,
+        heading,
+        copy,
+        include_cta,
+        cta_text,
+        link_external,
+        "link_internal_type": link_internal->_type,
+        "link_internal": link_internal->slug.current,
+      },
+      _type == "project_video" => {
+        _type,
+        video,
+        video_size,
+        include_caption,
+        caption,
+        include_copy,
+        copy_position,
+        copy_heading,
+        copy,
+        include_cta,
+        cta_text,
+        link_external,
+        "link_internal_type": link_internal->_type,
+        "link_internal": link_internal->slug.current,
+      }
+    },
   }
 }`;
 
@@ -45,12 +125,15 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       projectData: project,
+      projectContent: project.content,
     },
     revalidate: 1,
   };
 }
 
-export default function ProjectPage({ projectData }) {
+export default function ProjectPage({ projectData, projectContent }) {
+  //console.log(projectContent);
+
   let pageTheme = {
     background: "#111111",
     text: "#ffffff",
@@ -95,6 +178,7 @@ export default function ProjectPage({ projectData }) {
       </Head>
       <Layout>
         <HeroProject data={projectData} />
+        <ContentMapper sections={projectContent} />
       </Layout>
     </>
   );
