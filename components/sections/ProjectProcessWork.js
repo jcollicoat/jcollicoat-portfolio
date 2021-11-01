@@ -77,9 +77,8 @@ const EmblaSlideInner = styled.div`
 
 const ItemImage = styled.div`
   grid-column: 1 / -1;
-  margin: 0 0 ${(props) => props.theme.padding.md}
-    /* eslint no-confusing-arrow: ["error", {allowParens: true}] */
-    ${(props) => props.theme.padding.lg};
+  margin: 0 ${(props) => props.theme.padding.lg}
+    ${(props) => props.theme.padding.md} ${(props) => props.theme.padding.lg};
   padding-bottom: 56.25%;
   position: relative;
 `;

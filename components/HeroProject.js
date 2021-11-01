@@ -57,6 +57,11 @@ const Tag = styled.div`
   padding: 0.5rem 0.25rem;
   text-transform: uppercase;
   writing-mode: vertical-rl;
+  width: 1rem;
+
+  @media (min-width: 800px) {
+    width: 1.25rem;
+  }
 `;
 
 export default function HeroProject({ data }) {
