@@ -60,7 +60,7 @@ const Item = styled.a`
 
 export default function Footer() {
   return (
-    <Wrapper>
+    <Wrapper id="footer">
       <ContactForm />
       <SiteGrid>
         <List>

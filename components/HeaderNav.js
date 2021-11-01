@@ -1,5 +1,6 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const Nav = styled.nav`
   background-color: #000000;
@@ -36,7 +37,7 @@ const Nav = styled.nav`
   }
 `;
 
-const Item = styled.a`
+const itemCSS = css`
   @keyframes appear {
     from {
       opacity: 0;
@@ -78,6 +79,14 @@ const Item = styled.a`
   }
 `;
 
+const Item = styled.a`
+  ${itemCSS};
+`;
+
+const ContactItem = styled(AnchorLink)`
+  ${itemCSS};
+`;
+
 export default function HeaderNav({ handleClick, navOpen }) {
   return (
     <Nav navOpen={navOpen}>
@@ -91,11 +100,9 @@ export default function HeaderNav({ handleClick, navOpen }) {
           Articles
         </Item>
       </Link>
-      <Link href="/contact" passHref scroll={false}>
-        <Item delay="0.7s" onClick={navOpen && handleClick}>
-          Contact
-        </Item>
-      </Link>
+      <ContactItem href="#footer" delay="0.7s" onClick={navOpen && handleClick}>
+        Contact
+      </ContactItem>
     </Nav>
   );
 }
