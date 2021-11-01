@@ -35,14 +35,14 @@ const CopyParagraph = styled.p`
   line-height: 1.75;
 `;
 
-const Items = styled.div`
+const Items = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   grid-column: 1 / -1;
   justify-content: center;
 `;
 
-const Item = styled(motion.div)`
+const Item = styled.div`
   padding: ${(props) => props.theme.padding.sm};
   //text-align: center;
   width: calc(100% / ${(props) => props.columns});
@@ -84,11 +84,11 @@ export default function ProjectImageGrid({ data }) {
     threshold: 0.5,
   });
 
-  // Item animation
+  // Items animation
   const {
-    ref: itemRef,
-    ctrls: itemCtrls,
-    vars: itemVars,
+    ref: itemsRef,
+    ctrls: itemsCtrls,
+    vars: itemsVars,
   } = useAnimateIn({
     threshold: 0.25,
   });
@@ -105,16 +105,14 @@ export default function ProjectImageGrid({ data }) {
           <CopyHeading>{data.copy_heading}</CopyHeading>
           <CopyParagraph>{data.copy}</CopyParagraph>
         </Copy>
-        <Items>
+        <Items
+          ref={itemsRef}
+          initial="hidden"
+          animate={itemsCtrls}
+          variants={itemsVars}
+        >
           {data.items.map((item, index) => (
-            <Item
-              columns={data.columns}
-              key={index}
-              ref={itemRef}
-              initial="hidden"
-              animate={itemCtrls}
-              variants={itemVars}
-            >
+            <Item columns={data.columns} key={index}>
               <ImageContainer>
                 {item.image.includes(".svg") ? (
                   // eslint-disable-next-line @next/next/no-img-element

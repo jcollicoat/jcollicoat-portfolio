@@ -74,6 +74,21 @@ const projectQuery = `{
         "link_internal_type": link_internal->_type,
         "link_internal": link_internal->slug.current,
       },
+      _type == "project_process_work" => {
+        _type,
+        items[] {
+          "image": image.asset->url,
+          "image_is_decorative": image.is_decorative,
+          "image_alt": image.alt,
+          heading,
+          copy,
+          include_cta,
+          cta_text,
+          link_external,
+          "link_internal_type": link_internal->_type,
+          "link_internal": link_internal->slug.current,
+        }
+      },
       _type == "project_text" => {
         _type,
         heading,
