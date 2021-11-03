@@ -20,7 +20,6 @@ const ImageContainer = styled(motion.div)`
   background-color: #000000;
   grid-column: ${(props) => (props.reversed ? `3 / -1` : `1 / -3`)};
   opacity: 0.5;
-  padding-bottom: 60%;
   position: relative;
 
   @media (min-width: 1200px) {
@@ -183,10 +182,12 @@ export default function Project({ project, reversed }) {
                 src={project.image}
                 blurDataURL={`${project.image}?w=10`}
                 alt=""
-                layout="fill"
-                objectFit="cover"
+                height={project.image_dimensions.height}
+                layout="responsive"
+                objectFit="contain"
                 quality="100"
                 placeholder="blur"
+                width={project.image_dimensions.width}
               />
               <ImageOverlay reversed={reversed} />
               {project.is_interactive && (

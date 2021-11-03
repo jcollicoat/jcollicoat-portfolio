@@ -6,7 +6,7 @@ import client from "../lib/sanity";
 
 import Layout from "../components/Layout";
 
-const slugsQuery = `*[_type == "page" && name != "Homepage" && defined(slug.current)][].slug.current`;
+const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "page" && name != "Homepage" && defined(slug.current)][].slug.current`;
 
 const pageQuery = `{
   "page": *[_type == "page" && slug.current == $slug][0] {

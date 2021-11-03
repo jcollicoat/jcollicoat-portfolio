@@ -15,6 +15,7 @@ const ImageContainer = styled(motion.div)`
   align-self: center;
   grid-column: 1 / -1;
   height: auto;
+  position: relative;
 
   @media (min-width: 800px) {
     grid-column: ${(props) => (props.copy === "right" ? "1 / 13" : "13 / -1")};
@@ -32,7 +33,6 @@ const Caption = styled.div`
   text-align: center;
 
   @media (min-width: 800px) {
-    display: inline-block;
     margin-left: ${(props) => (props.copy === "right" ? "0" : "auto")};
     margin-right: ${(props) => (props.copy === "left" ? "0" : "auto")};
     text-align: ${(props) => (props.copy === "right" ? "left" : "right")};
@@ -50,11 +50,12 @@ const Copy = styled(motion.div)`
   grid-column: 1 / -1;
   margin: ${(props) => props.theme.padding.lg} auto;
   max-width: 40rem;
+  order: ${(props) => props.position === "left" && -1};
   width: 100%;
 
   @media (min-width: 800px) {
     grid-column: ${(props) =>
-      props.position === "right" ? "14 / -1" : "1 / 14"};
+      props.position === "right" ? "14 / -1" : "1 / 12"};
   }
 `;
 
@@ -135,10 +136,12 @@ export default function ProjectImageText({ data }) {
               src={data.image}
               blurDataURL={`${data.image}?w=10`}
               alt={data.image_is_decorative ? "" : data.image_alt}
-              layout="fill"
-              objectFit="cover"
+              height={data.image_dimensions.height}
+              layout="responsive"
+              objectFit="contain"
               quality="100"
               placeholder="blur"
+              width={data.image_dimensions.width}
             />
           )}
           {data.include_caption && (

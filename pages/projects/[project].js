@@ -8,7 +8,7 @@ import Layout from "../../components/Layout";
 import HeroProject from "../../components/HeroProject";
 import ContentMapper from "../../components/ContentMapper";
 
-const slugsQuery = `*[_type == "project" && defined(slug.current)][].slug.current`;
+const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "project" && defined(slug.current)][].slug.current`;
 
 const projectQuery = `{
   "project": *[_type == "project" && slug.current == $slug][0] {
@@ -27,6 +27,7 @@ const projectQuery = `{
       _type == "project_image" => {
         _type,
         "image": image.asset->url,
+        "image_dimensions": image.asset->metadata.dimensions,
         "image_is_decorative": image.is_decorative,
         "image_alt": image.alt,
         image_size,
@@ -47,8 +48,10 @@ const projectQuery = `{
         copy_heading,
         copy,
         columns,
+        image_size,
         items[] {
           "image": image.asset->url,
+          "image_dimensions": image.asset->metadata.dimensions,
           "image_is_decorative": image.is_decorative,
           "image_alt": image.alt,
           include_name,
@@ -60,6 +63,7 @@ const projectQuery = `{
       _type == "project_image_text" => {
         _type,
         "image": image.asset->url,
+        "image_dimensions": image.asset->metadata.dimensions,
         "image_is_decorative": image.is_decorative,
         "image_alt": image.alt,
         include_caption,
@@ -78,6 +82,7 @@ const projectQuery = `{
         _type,
         items[] {
           "image": image.asset->url,
+          "image_dimensions": image.asset->metadata.dimensions,
           "image_is_decorative": image.is_decorative,
           "image_alt": image.alt,
           heading,
@@ -147,8 +152,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectPage({ projectData, projectContent }) {
-  //console.log(projectContent);
-
   let pageTheme = {
     background: "#111111",
     text: "#ffffff",

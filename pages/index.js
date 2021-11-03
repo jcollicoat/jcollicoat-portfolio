@@ -27,6 +27,7 @@ const homepageQuery = `*[_type == "page" && name == "Homepage"][0] {
         name,
         description,
         "image": file.asset->url,
+        "image_dimensions": file.asset->metadata.dimensions,
         "slug": slug.current,
         tags[]-> {
           name

@@ -43,23 +43,49 @@ const Items = styled(motion.div)`
 `;
 
 const Item = styled.div`
+  min-width: calc(100% / 3);
   padding: ${(props) => props.theme.padding.sm};
-  //text-align: center;
+  text-align: center;
   width: calc(100% / ${(props) => props.columns});
 
   @media (min-width: 800px) {
+    min-width: 25%;
     padding: ${(props) => props.theme.padding.md};
   }
 
   @media (min-width: 1200px) {
-    padding: ${(props) => props.theme.padding.lg};
+    min-width: 20%;
+  }
+
+  @media (min-width: 1600px) {
+    min-width: 0;
   }
 `;
 
 const ImageContainer = styled.div`
-  height: auto;
+  margin: 0 auto;
   margin-bottom: ${(props) => props.theme.padding.md};
+  height: ${(props) => {
+    if (props.size === "small") {
+      return "4rem";
+    } else if (props.size === "medium") {
+      return "8rem";
+    }
+    return "auto";
+  }};
+  position: relative;
   width: 100%;
+
+  > img {
+    max-height: ${(props) => {
+      if (props.size === "small") {
+        return "4rem";
+      } else if (props.size === "medium") {
+        return "8rem";
+      }
+      return "auto";
+    }};
+  }
 `;
 
 const ItemName = styled.h3`
@@ -75,6 +101,7 @@ const ItemCopy = styled.p`
 `;
 
 export default function ProjectImageGrid({ data }) {
+  console.log(data);
   // Copy animation
   const {
     ref: copyRef,
@@ -113,7 +140,7 @@ export default function ProjectImageGrid({ data }) {
         >
           {data.items.map((item, index) => (
             <Item columns={data.columns} key={index}>
-              <ImageContainer>
+              <ImageContainer size={data.image_size}>
                 {item.image.includes(".svg") ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -125,10 +152,12 @@ export default function ProjectImageGrid({ data }) {
                     src={item.image}
                     blurDataURL={`${item.image}?w=10`}
                     alt={item.image_is_decorative ? "" : item.image_alt}
-                    layout="fill"
-                    objectFit="cover"
+                    height={item.image_dimensions.height}
+                    layout="responsive"
+                    objectFit="contain"
                     quality="100"
                     placeholder="blur"
+                    width={item.image_dimensions.width}
                   />
                 )}
               </ImageContainer>

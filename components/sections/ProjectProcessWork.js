@@ -79,7 +79,6 @@ const ItemImage = styled.div`
   grid-column: 1 / -1;
   margin: 0 ${(props) => props.theme.padding.lg}
     ${(props) => props.theme.padding.md} ${(props) => props.theme.padding.lg};
-  padding-bottom: 56.25%;
   position: relative;
 `;
 
@@ -204,10 +203,12 @@ export default function ProjectProcessWork({ data }) {
                             src={item.image}
                             blurDataURL={`${item.image}?w=10`}
                             alt={item.image_is_decorative ? "" : item.image_alt}
-                            layout="fill"
-                            objectFit="cover"
+                            height={item.image_dimensions.height}
+                            layout="responsive"
+                            objectFit="contain"
                             quality="100"
                             placeholder="blur"
+                            width={item.image_dimensions.width}
                           />
                         )}
                       </ItemImage>

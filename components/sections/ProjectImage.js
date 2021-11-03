@@ -21,7 +21,7 @@ const ImageContainer = styled(motion.div)`
       return "1 / -1";
     }
   }};
-  height: auto;
+  position: relative;
 
   @media (min-width: 800px) {
     grid-column: ${(props) => {
@@ -209,16 +209,18 @@ export default function ProjectImage({ data }) {
                 src={data.image}
                 blurDataURL={`${data.image}?w=10`}
                 alt={data.image_is_decorative ? "" : data.image_alt}
-                layout="fill"
-                objectFit="cover"
+                height={data.image_dimensions.height}
+                layout="responsive"
+                objectFit="contain"
                 quality="100"
                 placeholder="blur"
+                width={data.image_dimensions.width}
               />
             )}
           </ImageContainer>
         </SiteGrid>
       ) : (
-        <>
+        <ImageContainer>
           {data.image.includes(".svg") ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -230,13 +232,15 @@ export default function ProjectImage({ data }) {
               src={data.image}
               blurDataURL={`${data.image}?w=10`}
               alt={data.image_is_decorative ? "" : data.image_alt}
-              layout="fill"
-              objectFit="cover"
+              height={data.image_dimensions.height}
+              layout="responsive"
+              objectFit="contain"
               quality="100"
               placeholder="blur"
+              width={data.image_dimensions.width}
             />
           )}
-        </>
+        </ImageContainer>
       )}
       {data.include_caption && (
         <SiteGrid>
