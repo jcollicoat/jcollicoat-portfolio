@@ -68,7 +68,7 @@ const GlobalStyle = createGlobalStyle`
     */
     background-color: ${(props) => props.theme.background};
     min-height: 100vh;
-    transition: background-color 0.25s ${(props) => props.theme.easeout};
+    transition: background-color 0.5s ${(props) => props.theme.easeout};
   }
 
   a {

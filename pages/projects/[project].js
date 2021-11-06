@@ -189,7 +189,7 @@ export default function ProjectPage({ projectData, projectContent }) {
     });
 
     // Update background-color on body to reduce jank
-    //document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
+    document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -198,6 +198,34 @@ export default function ProjectPage({ projectData, projectContent }) {
       <Head>
         <title>{projectData.meta_title} – Joseph Collicoat</title>
         <meta name="description" content={projectData.meta_description} />
+        <meta
+          property="og:title"
+          content={projectData.meta_title}
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content={projectData.meta_description}
+          key="ogdesc"
+        />
+        <meta
+          property="og:site_name"
+          content="Joseph Collicoat"
+          key="ogsitename"
+        />
+        <meta
+          property="og:image"
+          content={projectData.meta_image}
+          key="ogimage"
+        />
+        <meta
+          property="og:url"
+          content="https://dev.josephcollicoat.com"
+          key="ogtitle"
+        />
+        <meta name="twitter:card" content="summary_large_image" key="twcard" />
+        <meta name="twitter:creator" content="@jcollicoat" key="twhandle" />
+        <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
         <HeroProject data={projectData} />

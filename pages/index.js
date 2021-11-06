@@ -83,7 +83,7 @@ export default function HomePage({ pageData, pageContent }) {
     });
 
     // Update background-color on body to reduce jank
-    //document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
+    document.body.style.backgroundColor = `${pageTheme.background} || #111111`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

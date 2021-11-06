@@ -1,20 +1,26 @@
 import { useEffect, useContext } from "react";
 import Head from "next/head";
-import { ThemeContext } from "../contexts/ThemeStore";
+import { ThemeContext } from "../../contexts/ThemeStore";
 
-import client from "../lib/sanity";
+import client from "../../lib/sanity";
 
-import Layout from "../components/Layout";
+import Layout from "../../components/Layout";
+import HeroProject from "../../components/HeroProject";
+import ContentMapper from "../../components/ContentMapper";
 
-const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "page" && name != "Homepage" && defined(slug.current)][].slug.current`;
+const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "article" && defined(slug.current)][].slug.current`;
 
-const pageQuery = `{
-  "page": *[_type == "page" && slug.current == $slug][0] {
+const articleQuery = `{
+  "article": *[_type == "article" && slug.current == $slug][0] {
     meta_title,
     meta_description,
+    "meta_image": meta_image->url,
     name,
-    theme,
-    custom_theme
+    intro,
+    tags[]-> {
+    name
+    },
+    content
   }
 }`;
 
@@ -24,7 +30,7 @@ export async function getStaticPaths() {
   return {
     paths: slugs.map((slug) => ({
       params: {
-        page: slug,
+        article: slug,
       },
     })),
     fallback: false,
@@ -32,40 +38,25 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const { page } = await client.fetch(pageQuery, {
-    slug: params.page,
+  const { article } = await client.fetch(articleQuery, {
+    slug: params.article,
   });
 
   return {
     props: {
-      pageData: page,
+      articleData: article,
+      articleContent: article.content,
     },
     revalidate: 1,
   };
 }
 
-export default function Page({ pageData }) {
+export default function ArticlePage({ articleData, articleContent }) {
+  console.log(articleContent);
   let pageTheme = {
-    background: "#111111",
-    text: "#ffffff",
+    background: "#ffffff",
+    text: "#111111",
   };
-
-  if (pageData.theme === "dark") {
-    pageTheme = {
-      background: "#111111",
-      text: "#ffffff",
-    };
-  } else if (pageData.theme === "light") {
-    pageTheme = {
-      background: "#ffffff",
-      text: "#111111",
-    };
-  } else if (pageData.theme === "custom") {
-    pageTheme = {
-      background: pageData.custom_theme.background.hex,
-      text: pageData.custom_theme.text.hex,
-    };
-  }
 
   const { theme, switchTheme } = useContext(ThemeContext);
 
@@ -84,12 +75,16 @@ export default function Page({ pageData }) {
   return (
     <>
       <Head>
-        <title>{pageData.meta_title} – Joseph Collicoat</title>
-        <meta name="description" content={pageData.meta_description} />
-        <meta property="og:title" content={pageData.meta_title} key="ogtitle" />
+        <title>{articleData.meta_title} – Joseph Collicoat</title>
+        <meta name="description" content={articleData.meta_description} />
+        <meta
+          property="og:title"
+          content={articleData.meta_title}
+          key="ogtitle"
+        />
         <meta
           property="og:description"
-          content={pageData.meta_description}
+          content={articleData.meta_description}
           key="ogdesc"
         />
         <meta
@@ -97,7 +92,11 @@ export default function Page({ pageData }) {
           content="Joseph Collicoat"
           key="ogsitename"
         />
-        <meta property="og:image" content={pageData.meta_image} key="ogimage" />
+        <meta
+          property="og:image"
+          content={articleData.meta_image}
+          key="ogimage"
+        />
         <meta
           property="og:url"
           content="https://dev.josephcollicoat.com"
@@ -108,9 +107,7 @@ export default function Page({ pageData }) {
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
-        <div>
-          <div>{pageData.name}</div>
-        </div>
+        <HeroProject data={articleData} />
       </Layout>
     </>
   );
