@@ -22,6 +22,7 @@ const Word = styled(motion.span)`
 
 const Character = styled(motion.span)`
   display: inline-block;
+  margin-right: -0.05em;
 `;
 
 export default function ContactFormHeading({ heading }) {

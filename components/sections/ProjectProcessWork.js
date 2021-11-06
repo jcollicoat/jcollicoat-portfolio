@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback } from "react";
 import styled, { css } from "styled-components";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import Link from "next/link";
 
 import SiteGrid from "../SiteGrid";
+
+import CallToAction from "../CallToAction";
 
 const Section = styled.section`
   margin: 10rem 0;
@@ -19,6 +20,7 @@ const Headings = styled.div`
 const Title = styled.h2`
   font-size: 2rem;
   font-weight: 600;
+  letter-spacing: -0.05em;
   margin-bottom: 0.5em;
 
   @media (min-width: 800px) {
@@ -86,6 +88,7 @@ const ItemHeading = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
   grid-column: 1 / -1;
+  letter-spacing: -0.05em;
   margin: 0 ${(props) => props.theme.padding.lg} 0.5em;
   max-width: 40rem;
 `;
@@ -97,25 +100,10 @@ const ItemCopy = styled.p`
   max-width: 40rem;
 `;
 
-const ItemCTA = styled.a`
-  align-items: center;
-  cursor: pointer;
-  display: flex;
+const ItemCTA = styled.div`
   grid-column: 1 / -1;
   margin: ${(props) => props.theme.padding.sm}
     ${(props) => props.theme.padding.lg} 0;
-  opacity: 0.5;
-  transition: opacity 0.25s ease-out;
-
-  :hover {
-    opacity: 1;
-  }
-`;
-
-const ItemCTAIcon = styled.svg`
-  height: 1.5rem;
-  margin-left: 0.5rem;
-  width: 1.5rem;
 `;
 
 const Navigation = styled.div`
@@ -135,7 +123,7 @@ const buttonCSS = css`
   height: 2.5rem;
   outline: none;
   padding: 0;
-  transition: opacity 0.25s ease-out;
+  transition: opacity 0.25s ${(props) => props.theme.easeout};
   width: 2.5rem;
 
   &:disabled {
@@ -214,58 +202,24 @@ export default function ProjectProcessWork({ data }) {
                       </ItemImage>
                       <ItemHeading>{item.heading}</ItemHeading>
                       <ItemCopy>{item.copy}</ItemCopy>
-                      {item.include_cta === "internal" && (
-                        // eslint-disable-next-line @next/next/link-passhref
-                        <Link
-                          href={
-                            item.link_internal_type === "project"
-                              ? `/projects/${item.link_internal}`
-                              : item.link_internal_type === "article"
-                              ? `/articles/${item.link_internal}`
-                              : `/${item.link_internal}`
-                          }
-                          scroll={false}
-                        >
-                          <ItemCTA>
-                            {item.cta_text}
-                            <ItemCTAIcon
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="100%"
-                              height="100%"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <line x1="5" y1="12" x2="19" y2="12"></line>
-                              <polyline points="12 5 19 12 12 19"></polyline>
-                            </ItemCTAIcon>
-                          </ItemCTA>
-                        </Link>
-                      )}
-                      {item.include_cta === "external" && (
-                        <ItemCTA
-                          href={item.link_external}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {item.cta_text}
-                          <ItemCTAIcon
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                          </ItemCTAIcon>
+                      {item.include_cta !== "none" && (
+                        <ItemCTA>
+                          <CallToAction
+                            internalType={
+                              item.include_cta === "internal"
+                                ? item.link_internal_type
+                                : null
+                            }
+                            link={
+                              item.include_cta === "internal"
+                                ? item.link_internal
+                                : item.include_cta === "file"
+                                ? item.link_file
+                                : item.link_external
+                            }
+                            text={item.cta_text}
+                            type={item.include_cta}
+                          />
                         </ItemCTA>
                       )}
                     </EmblaSlideInner>

@@ -20,6 +20,7 @@ const Copy = styled(motion.div)`
 const CopyHeading = styled.h2`
   font-size: 2rem;
   font-weight: 600;
+  letter-spacing: -0.05em;
   margin-bottom: 0.5em;
 
   @media (min-width: 800px) {

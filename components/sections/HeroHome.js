@@ -75,7 +75,8 @@ const Intro = styled(motion.div)`
 `;
 
 const Heading = styled.h1`
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.05em;
   margin-bottom: 1rem;
 `;
 
@@ -89,7 +90,7 @@ const CTA = styled(AnchorLink)`
   display: flex;
   margin-top: ${(props) => props.theme.padding.sm};
   opacity: 0.5;
-  transition: opacity 0.25s ease-out;
+  transition: opacity 0.25s ${(props) => props.theme.easeout};
 
   :hover {
     opacity: 1;

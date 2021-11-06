@@ -5,7 +5,7 @@ const Main = styled(motion.main)`
   background-color: ${(props) => props.theme.background || `#111111`};
   color: ${(props) => props.theme.text || "#ffffff"};
   min-height: 100vh;
-  padding: 15rem 0;
+  padding: 15rem 0 10rem 0;
   transition: background-color 0.25s ${(props) => props.theme.easeout};
   width: 100%;
 `;
