@@ -1,12 +1,11 @@
-import { useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Head from "next/head";
 import { ThemeContext } from "../../contexts/ThemeStore";
 
 import client from "../../lib/sanity";
 
 import Layout from "../../components/Layout";
-import HeroProject from "../../components/HeroProject";
-import ContentMapper from "../../components/ContentMapper";
+import ArticleBlocks from "../../components/sections/ArticleBlocks";
 
 const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "article" && defined(slug.current)][].slug.current`;
 
@@ -20,7 +19,19 @@ const articleQuery = `{
     tags[]-> {
     name
     },
-    content
+    content[] {
+      ...,
+      markDefs[] {
+        ...,
+        _type == "link_internal" => {
+          "slug": @.reference->slug.current,
+          "type": @.reference->_type,
+        },
+        _type == "link_file" => {
+          "url": @.reference->file.asset->url
+        },
+      }
+    }
   }
 }`;
 
@@ -52,7 +63,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ArticlePage({ articleData, articleContent }) {
-  console.log(articleContent);
   let pageTheme = {
     background: "#ffffff",
     text: "#111111",
@@ -107,7 +117,7 @@ export default function ArticlePage({ articleData, articleContent }) {
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
-        <HeroProject data={articleData} />
+        <ArticleBlocks content={articleContent} />
       </Layout>
     </>
   );
