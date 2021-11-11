@@ -8,7 +8,7 @@ const Wrapper = styled.footer`
   background-color: #000000;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   min-height: 100vh;
   padding: ${(props) => props.theme.padding.lg} 0;
 `;

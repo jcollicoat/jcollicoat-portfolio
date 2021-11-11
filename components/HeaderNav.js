@@ -100,7 +100,12 @@ export default function HeaderNav({ handleClick, navOpen }) {
           Articles
         </Item>
       </Link>
-      <ContactItem href="#footer" delay="0.7s" onClick={navOpen && handleClick}>
+      <Link href="/about" passHref scroll={false}>
+        <Item delay="0.7s" onClick={navOpen && handleClick}>
+          About Me
+        </Item>
+      </Link>
+      <ContactItem href="#footer" delay="0.8s" onClick={navOpen && handleClick}>
         Contact
       </ContactItem>
     </Nav>

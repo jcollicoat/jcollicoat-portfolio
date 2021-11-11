@@ -30,7 +30,7 @@ export default function CallToAction({ internalType, link, text, type }) {
               ? `/projects/${link}`
               : internalType === "article"
               ? `/articles/${link}`
-              : `/${link}`
+              : `/${link === "homepage" ? "" : link}`
           }
           passHref
           scroll={false}
