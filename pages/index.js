@@ -111,7 +111,7 @@ export default function HomePage({ pageData, pageContent }) {
         />
         <meta name="twitter:card" content="summary_large_image" key="twcard" />
         <meta name="twitter:creator" content="@jcollicoat" key="twhandle" />
-        <link rel="icon" href="/favicon.ico" key="" />
+        <link rel="icon" href="/Favicon.png" key="" />
       </Head>
       <Layout>
         <ContentMapper sections={pageContent} />
