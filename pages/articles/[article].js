@@ -5,6 +5,7 @@ import { ThemeContext } from "../../contexts/ThemeStore";
 import client from "../../lib/sanity";
 
 import Layout from "../../components/Layout";
+import HeroArticle from "../../components/HeroArticle";
 import ArticleBlocks from "../../components/sections/ArticleBlocks";
 
 const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "article" && defined(slug.current)][].slug.current`;
@@ -16,8 +17,10 @@ const articleQuery = `{
     "meta_image": meta_image->url,
     name,
     intro,
+    "image": file.asset->url,
+    "image_dimensions": file.asset->metadata.dimensions,
     tags[]-> {
-    name
+      name
     },
     content[] {
       ...,
@@ -117,6 +120,7 @@ export default function ArticlePage({ articleData, articleContent }) {
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
+        <HeroArticle data={articleData} />
         <ArticleBlocks content={articleContent} />
       </Layout>
     </>

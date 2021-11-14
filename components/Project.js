@@ -99,7 +99,7 @@ const Content = styled.div`
   }
 `;
 
-const Description = styled(motion.div)`
+const Description = styled(motion.p)`
   line-height: 1.25;
   max-width: 30rem;
 `;

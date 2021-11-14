@@ -1,5 +1,7 @@
 // Sections
+import ArticlesList from "./sections/ArticlesList";
 import HeroHome from "./sections/HeroHome";
+import HeroPage from "./sections/HeroPage";
 import ProjectsList from "./sections/ProjectsList";
 import ProjectImage from "./sections/ProjectImage";
 import ProjectImageGrid from "./sections/ProjectImageGrid";
@@ -13,8 +15,12 @@ export default function ContentMapper({ sections }) {
     sections !== null &&
     sections.map((section, index) => {
       switch (section._type) {
+        case "articles":
+          return <ArticlesList data={section} key={index} />;
         case "hero_home":
           return <HeroHome data={section} key={index} />;
+        case "hero_page":
+          return <HeroPage data={section} key={index} />;
         case "projects":
           return <ProjectsList data={section} key={index} />;
         case "project_image":

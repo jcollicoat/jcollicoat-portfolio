@@ -5,6 +5,7 @@ import { ThemeContext } from "../contexts/ThemeStore";
 import client from "../lib/sanity";
 
 import Layout from "../components/Layout";
+import ContentMapper from "../components/ContentMapper";
 
 const slugsQuery = `*[!(_id in path('drafts.**')) && _type == "page" && name != "Homepage" && defined(slug.current)][].slug.current`;
 
@@ -14,7 +15,47 @@ const pageQuery = `{
     meta_description,
     name,
     theme,
-    custom_theme
+    custom_theme,
+    content[] {
+      _type == "articles" => {
+        _type,
+        articles_list[]-> {
+          name,
+          description,
+          "image": file.asset->url,
+          "image_dimensions": file.asset->metadata.dimensions,
+          "slug": slug.current,
+          tags[]-> {
+            name
+          },
+        }
+      },
+      _type == "hero_home" => {
+        _type,
+        heading,
+        intro,
+        cta
+      },
+      _type == "hero_page" => {
+        _type,
+        title,
+        intro
+      },
+      _type == "projects" => {
+        _type,
+        projects_list[]-> {
+          name,
+          description,
+          "image": file.asset->url,
+          "image_dimensions": file.asset->metadata.dimensions,
+          "slug": slug.current,
+          tags[]-> {
+            name
+          },
+          is_interactive
+        }
+      },
+    }
   }
 }`;
 
@@ -39,12 +80,13 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       pageData: page,
+      pageContent: page.content,
     },
     revalidate: 1,
   };
 }
 
-export default function Page({ pageData }) {
+export default function Page({ pageData, pageContent }) {
   let pageTheme = {
     background: "#111111",
     text: "#ffffff",
@@ -108,9 +150,7 @@ export default function Page({ pageData }) {
         <link rel="icon" href="/favicon.ico" key="" />
       </Head>
       <Layout>
-        <div>
-          <div>{pageData.name}</div>
-        </div>
+        <ContentMapper sections={pageContent} />
       </Layout>
     </>
   );
