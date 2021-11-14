@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       <ParallaxProvider>
         <ThemeStore>
           <GlobalTheme>
-            {/*<MouseCursor />*/}
+            <MouseCursor />
             <Header />
             <AnimatePresence
               exitBeforeEnter

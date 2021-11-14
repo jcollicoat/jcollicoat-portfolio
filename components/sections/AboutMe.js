@@ -89,7 +89,7 @@ const Date = styled.div`
 `;
 
 const Description = styled.p`
-  line-height: 1.25;
+  line-height: 1.75;
 `;
 
 export default function AboutMe({ data }) {

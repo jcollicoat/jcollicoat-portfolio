@@ -64,7 +64,9 @@ export default function Footer() {
       <ContactForm />
       <SiteGrid>
         <List>
-          <Item href="#">Resumé / CV</Item>
+          <Item href="/Joseph Collicoat CV.pdf" target="_blank">
+            Resumé / CV
+          </Item>
           <Item
             href="https://github.com/jcollicoat"
             rel="noopener noreferrer"

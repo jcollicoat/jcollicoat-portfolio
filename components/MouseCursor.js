@@ -19,6 +19,7 @@ const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
     pointer-events: none;
     position: fixed;
     width: 1rem;
+    will-change: transform;
     z-index: 200;
   }
 `;
