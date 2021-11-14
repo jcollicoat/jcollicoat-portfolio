@@ -1,4 +1,5 @@
 // Sections
+import AboutMe from "./sections/AboutMe";
 import ArticlesList from "./sections/ArticlesList";
 import HeroHome from "./sections/HeroHome";
 import HeroPage from "./sections/HeroPage";
@@ -15,6 +16,8 @@ export default function ContentMapper({ sections }) {
     sections !== null &&
     sections.map((section, index) => {
       switch (section._type) {
+        case "about_me":
+          return <AboutMe data={section} key={index} />;
         case "articles":
           return <ArticlesList data={section} key={index} />;
         case "hero_home":

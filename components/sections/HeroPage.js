@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { useAnimation, motion } from "framer-motion";
 import { Parallax } from "react-scroll-parallax";
 import { useInView } from "react-intersection-observer";
+import Image from "next/image";
 
 import useMediaQuery from "../../hooks/useMediaQuery";
 import useAnimateIn from "../../hooks/useAnimateIn";
+import useFadeIn from "../../hooks/useFadeIn";
 
 import SiteGrid from "../SiteGrid";
 
@@ -13,11 +15,36 @@ const Section = styled.section`
   margin: 0 0 10rem 0;
 `;
 
+const ImageContainer = styled(motion.div)`
+  background-color: ${(props) => props.theme.background};
+  grid-column: 13 / -1;
+  margin-bottom: 2rem;
+  position: relative;
+
+  img {
+    border-radius: 50%;
+  }
+
+  @media (min-width: 800px) {
+    grid-column: 16 / -1;
+  }
+
+  @media (min-width: 1200px) {
+    grid-column: 13 / span 6;
+  }
+
+  @media (min-width: 1600px) {
+    grid-column: 12 / span 5;
+  }
+`;
+
 const TitleParallax = styled(Parallax)`
   grid-column: 1 / -1;
+  margin-top: ${(props) => (props.image ? "-4rem" : "0")};
 
   @media (min-width: 800px) {
     grid-column: 4 / 21;
+    margin-top: ${(props) => (props.image ? "-8rem" : "0")};
   }
 `;
 
@@ -124,10 +151,40 @@ export default function HeroPage({ data }) {
     threshold: 0.5,
   });
 
+  // Image animation
+  const {
+    ref: imageRef,
+    ctrls: imageCtrls,
+    vars: imageVars,
+  } = useFadeIn({
+    delay: 0.5,
+    threshold: 0.5,
+  });
+
   return (
     <Section>
       <SiteGrid>
-        <TitleParallax y={yOffset}>
+        {data.include_image === true && (
+          <ImageContainer
+            ref={imageRef}
+            initial="hidden"
+            animate={imageCtrls}
+            variants={imageVars}
+          >
+            <Image
+              src={data.image}
+              blurDataURL={`${data.image}?w=10`}
+              alt={`Hey look, it's me!`}
+              height={data.image_dimensions.height}
+              layout="responsive"
+              objectFit="contain"
+              quality="100"
+              placeholder="blur"
+              width={data.image_dimensions.width}
+            />
+          </ImageContainer>
+        )}
+        <TitleParallax image={data.include_image} y={yOffset}>
           <Title aria-label={data.title} role="heading">
             {data.title.split(" ").map((word, index) => {
               return (

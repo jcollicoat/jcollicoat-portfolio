@@ -102,7 +102,6 @@ const ItemCopy = styled.p`
 `;
 
 export default function ProjectImageGrid({ data }) {
-  console.log(data);
   // Copy animation
   const {
     ref: copyRef,

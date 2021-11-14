@@ -17,6 +17,11 @@ const pageQuery = `{
     theme,
     custom_theme,
     content[] {
+      _type == "about_me" => {
+        _type,
+        education,
+        experience,
+      },
       _type == "articles" => {
         _type,
         articles_list[]-> {
@@ -39,7 +44,10 @@ const pageQuery = `{
       _type == "hero_page" => {
         _type,
         title,
-        intro
+        intro,
+        include_image,
+        "image": image.asset->url,
+        "image_dimensions": image.asset->metadata.dimensions,
       },
       _type == "projects" => {
         _type,
