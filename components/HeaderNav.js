@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import { useRouter } from "next/router";
 
 const Nav = styled.nav`
   background-color: #000000;
@@ -37,7 +38,7 @@ const Nav = styled.nav`
   }
 `;
 
-const itemCSS = css`
+const Wrapper = styled.div`
   @keyframes appear {
     from {
       opacity: 0;
@@ -52,11 +53,16 @@ const itemCSS = css`
   animation: appear 1s ${(props) => props.theme.easeout} both;
   animation-delay: ${(props) => props.delay};
   margin: ${(props) => props.theme.padding.lg} 0;
-  position: relative;
 
   @media (min-width: 800px) {
     margin: 0 0 0 ${(props) => props.theme.padding.lg};
+  }
+`;
 
+const itemCSS = css`
+  position: relative;
+
+  @media (min-width: 800px) {
     ::after {
       background-color: #ffffff;
       content: "";
@@ -83,31 +89,51 @@ const Item = styled.a`
   ${itemCSS};
 `;
 
-const ContactItem = styled(AnchorLink)`
+const AnchorItem = styled(AnchorLink)`
   ${itemCSS};
 `;
 
 export default function HeaderNav({ handleClick, navOpen }) {
+  const router = useRouter();
+
   return (
     <Nav navOpen={navOpen}>
-      <Link href="/" passHref scroll={false}>
-        <Item delay="0.5s" onClick={navOpen && handleClick}>
-          Projects
-        </Item>
-      </Link>
-      <Link href="/articles" passHref scroll={false}>
-        <Item delay="0.6s" onClick={navOpen && handleClick}>
-          Articles
-        </Item>
-      </Link>
-      <Link href="/about" passHref scroll={false}>
-        <Item delay="0.7s" onClick={navOpen && handleClick}>
-          About Me
-        </Item>
-      </Link>
-      <ContactItem href="#footer" delay="0.8s" onClick={navOpen && handleClick}>
-        Contact
-      </ContactItem>
+      <Wrapper delay="0.5s">
+        {router.pathname === "/" ? (
+          <AnchorItem
+            href="#projects-list"
+            offset="160"
+            onClick={navOpen && handleClick}
+          >
+            Projects
+          </AnchorItem>
+        ) : (
+          <Link href="/" passHref scroll={false}>
+            <Item onClick={navOpen && handleClick}>Projects</Item>
+          </Link>
+        )}
+      </Wrapper>
+      <Wrapper delay="0.6s">
+        <Link href="/articles" passHref scroll={false}>
+          <Item onClick={navOpen && handleClick}>Articles</Item>
+        </Link>
+      </Wrapper>
+      <Wrapper delay="0.7s">
+        <Link href="/about" passHref scroll={false}>
+          <Item delay="0.7s" onClick={navOpen && handleClick}>
+            About Me
+          </Item>
+        </Link>
+      </Wrapper>
+      <Wrapper delay="0.8s">
+        <AnchorItem
+          href="#footer"
+          delay="0.8s"
+          onClick={navOpen && handleClick}
+        >
+          Contact
+        </AnchorItem>
+      </Wrapper>
     </Nav>
   );
 }
