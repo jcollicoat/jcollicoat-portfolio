@@ -64,7 +64,7 @@ const itemCSS = css`
 
   @media (min-width: 800px) {
     ::after {
-      background-color: #ffffff;
+      background-color: ${(props) => props.theme.text};
       content: "";
       display: block;
       height: 2px;

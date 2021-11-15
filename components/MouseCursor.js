@@ -26,6 +26,7 @@ const Cursor = styled.div.attrs(({ mouseX, mouseY }) => ({
 
 export default function MouseCursor() {
   const { x, y } = useMousePosition();
+  console.log(x, y);
 
   const hasMovedCursor = typeof x === "number" && typeof y === "number";
 

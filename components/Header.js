@@ -8,11 +8,13 @@ import HeaderButton from "./HeaderButton";
 import HeaderNav from "./HeaderNav";
 
 const Wrapper = styled.header`
-  mix-blend-mode: ${(props) => (props.navOpen ? `normal` : `difference`)};
+  color: ${(props) => props.theme.text};
+  //mix-blend-mode: ${(props) => (props.navOpen ? `normal` : `difference`)};
   padding: ${(props) => props.theme.padding.md} 0;
-  pointer-events: none;
+  //pointer-events: none;
   position: fixed;
   top: 0;
+  transition: color 0.25s ${(props) => props.theme.easeout};
   width: 100%;
   z-index: 100;
 `;

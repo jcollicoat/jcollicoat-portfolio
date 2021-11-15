@@ -3,9 +3,11 @@ import styled from "styled-components";
 
 const Logo = styled.svg`
   cursor: pointer;
+  fill: ${(props) => props.theme.text};
   grid-column: 1 / 2;
   height: 3rem;
   pointer-events: auto;
+  transition: fill 0.25s ${(props) => props.theme.easeout};
   width: 3rem;
   z-index: 101;
 
@@ -18,7 +20,7 @@ export default function HeaderLogo() {
   return (
     <Link href="/" passHref scroll={false}>
       <Logo
-        fill="#ffffff"
+        //fill="#ffffff"
         height="100%"
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"

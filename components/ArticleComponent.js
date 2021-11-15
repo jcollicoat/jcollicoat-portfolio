@@ -25,6 +25,7 @@ const ReloadButton = styled.button`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
+  color: #111111;
   cursor: pointer;
   display: flex;
   font-size: 0.75rem;

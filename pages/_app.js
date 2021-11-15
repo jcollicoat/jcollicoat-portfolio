@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { useRouter } from "next/dist/client/router";
 
-import MouseCursor from "../components/MouseCursor";
+//import MouseCursor from "../components/MouseCursor";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       <ParallaxProvider>
         <ThemeStore>
           <GlobalTheme>
-            <MouseCursor />
+            {/*<MouseCursor />*/}
             <Header />
             <AnimatePresence
               exitBeforeEnter

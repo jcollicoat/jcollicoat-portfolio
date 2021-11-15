@@ -38,10 +38,11 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
 
-    // Disable cursor on mouse-controlled devices
+    /* Disable cursor on mouse-controlled devices
     @media (hover: hover) and (pointer: fine) {
       cursor: none !important;
     }
+    */
   }
 
   html,
