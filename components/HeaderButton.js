@@ -2,7 +2,12 @@ import styled from "styled-components";
 
 const Button = styled.svg`
   align-self: center;
-  color: #ffffff;
+  color: ${(props) => {
+    if (props.nav_open) {
+      return `#ffffff`;
+    }
+    return props.theme.text;
+  }};
   cursor: pointer;
   grid-column: -1 / -1;
   height: 2rem;
@@ -25,6 +30,7 @@ export default function HeaderButton({ handleClick, navOpen }) {
     <Button
       fill="none"
       height="100%"
+      nav_open={navOpen}
       onClick={handleClick}
       stroke="currentColor"
       strokeWidth="2"

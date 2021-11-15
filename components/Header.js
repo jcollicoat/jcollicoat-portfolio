@@ -8,7 +8,7 @@ import HeaderButton from "./HeaderButton";
 import HeaderNav from "./HeaderNav";
 
 const Wrapper = styled.header`
-  color: ${(props) => props.theme.text};
+  color: #ffffff;
   //mix-blend-mode: ${(props) => (props.navOpen ? `normal` : `difference`)};
   padding: ${(props) => props.theme.padding.md} 0;
   //pointer-events: none;
@@ -17,6 +17,10 @@ const Wrapper = styled.header`
   transition: color 0.25s ${(props) => props.theme.easeout};
   width: 100%;
   z-index: 100;
+
+  @media (min-width: 800px) {
+    color: ${(props) => props.theme.text};
+  }
 `;
 
 export default function Header() {
@@ -29,7 +33,7 @@ export default function Header() {
   return (
     <Wrapper navOpen={navOpen}>
       <SiteGrid>
-        <HeaderLogo />
+        <HeaderLogo navOpen={navOpen} />
         <HeaderButton handleClick={handleClick} navOpen={navOpen} />
         <HeaderNav handleClick={handleClick} navOpen={navOpen} />
       </SiteGrid>

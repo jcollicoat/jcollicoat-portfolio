@@ -3,7 +3,12 @@ import styled from "styled-components";
 
 const Logo = styled.svg`
   cursor: pointer;
-  fill: ${(props) => props.theme.text};
+  fill: ${(props) => {
+    if (props.nav_open) {
+      return `#ffffff`;
+    }
+    return props.theme.text;
+  }};
   grid-column: 1 / 2;
   height: 3rem;
   pointer-events: auto;
@@ -16,12 +21,12 @@ const Logo = styled.svg`
   }
 `;
 
-export default function HeaderLogo() {
+export default function HeaderLogo({ navOpen }) {
   return (
     <Link href="/" passHref scroll={false}>
       <Logo
-        //fill="#ffffff"
         height="100%"
+        nav_open={navOpen}
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
