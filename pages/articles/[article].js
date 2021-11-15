@@ -14,7 +14,7 @@ const articleQuery = `{
   "article": *[_type == "article" && slug.current == $slug][0] {
     meta_title,
     meta_description,
-    "meta_image": meta_image->url,
+    "meta_image": meta_image.asset->url,
     name,
     intro,
     "image": file.asset->url,

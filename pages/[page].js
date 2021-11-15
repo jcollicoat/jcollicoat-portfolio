@@ -13,6 +13,7 @@ const pageQuery = `{
   "page": *[_type == "page" && slug.current == $slug][0] {
     meta_title,
     meta_description,
+    "meta_image": meta_image.asset->url,
     name,
     theme,
     custom_theme,
