@@ -148,7 +148,7 @@ export default function ProjectVideo({ data }) {
           size={data.video_size}
         >
           <VideoEmbed
-            src="https://player.vimeo.com/video/239615536"
+            src={`https://player.vimeo.com/video/${data.video}`}
             frameborder="0"
             webkitAllowFullScreen
             mozallowfullscreen
